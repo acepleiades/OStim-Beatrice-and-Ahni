@@ -11,6 +11,15 @@ BA_Ahni.SetPlayerTeammate()
 BeatriceFollowerAlias.ForceRefTo(akspeaker)
 AhniFollowerAlias.ForceRefTo(BA_Ahni)
 PlayerFollowerCount.SetValue(1)
+
+SandboxAlias.Clear()
+SandboxAlias1.Clear()
+SandboxAlias2.Clear()
+SandboxAlias3.Clear()
+SandboxAlias4.Clear()
+SandboxAlias5.Clear()
+SandboxAlias6.Clear()
+SandboxAlias7.Clear()
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -21,3 +30,11 @@ Actor Property BA_Ahni Auto
 ReferenceAlias Property BeatriceFollowerAlias Auto
 ReferenceAlias Property AhniFollowerAlias Auto
 GlobalVariable Property PlayerFollowerCount Auto
+ReferenceAlias Property SandboxAlias Auto
+ReferenceAlias Property SandboxAlias1 Auto
+ReferenceAlias Property SandboxAlias2 Auto
+ReferenceAlias Property SandboxAlias3 Auto
+ReferenceAlias Property SandboxAlias4 Auto
+ReferenceAlias Property SandboxAlias5 Auto
+ReferenceAlias Property SandboxAlias6 Auto
+ReferenceAlias Property SandboxAlias7 Auto
