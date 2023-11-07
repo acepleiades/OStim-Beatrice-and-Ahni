@@ -7,11 +7,10 @@ Scriptname QF_BA_SpellFindAhniQuest_0809A289 Extends Quest Hidden
 ReferenceAlias Property Alias_Ahni Auto
 ;END ALIAS PROPERTY
 
-;BEGIN FRAGMENT Fragment_2
-Function Fragment_2()
+;BEGIN FRAGMENT Fragment_3
+Function Fragment_3()
 ;BEGIN CODE
-completeallobjectives()
-stop()
+SetObjectiveDisplayed(10)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -19,15 +18,15 @@ EndFunction
 ;BEGIN FRAGMENT Fragment_4
 Function Fragment_4()
 ;BEGIN CODE
-setstage(10)
+SetStage(10)
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_3
-Function Fragment_3()
+;BEGIN FRAGMENT Fragment_2
+Function Fragment_2()
 ;BEGIN CODE
-setobjectivedisplayed(10)
+stop()
 ;END CODE
 EndFunction
 ;END FRAGMENT
