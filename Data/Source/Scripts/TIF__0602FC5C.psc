@@ -6,14 +6,16 @@ Scriptname TIF__0602FC5C Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-BA_Beatrice.setrelationshiprank(game.getplayer(), 1)
-akspeaker.setrelationshiprank(game.getplayer(), 1)
+BA_Beatrice.setrelationshiprank(game.getplayer(), 2)
+akspeaker.setrelationshiprank(game.getplayer(), 2)
 MyAlias.Clear()
 MyAlias1.Clear()
 MyQuest.SetStage(40)
 
 BA_Beatrice.SetPlayerTeammate()
 akspeaker.SetPlayerTeammate()
+BA_Beatrice.SetFactionRank(CurrentFollowerFaction, 1)
+akspeaker.SetFactionRank(CurrentFollowerFaction, 1)
 BeatriceFollowerAlias.ForceRefTo(BA_Beatrice)
 AhniFollowerAlias.ForceRefTo(akspeaker)
 PlayerFollowerCount.SetValue(1)
@@ -30,3 +32,4 @@ Actor Property BA_Beatrice Auto
 ReferenceAlias Property BeatriceFollowerAlias Auto
 ReferenceAlias Property AhniFollowerAlias Auto
 GlobalVariable Property PlayerFollowerCount Auto
+Faction Property CurrentFollowerFaction  Auto  

@@ -8,6 +8,8 @@ Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
 akspeaker.SetPlayerTeammate()
 BA_Ahni.SetPlayerTeammate()
+akspeaker.SetFactionRank(CurrentFollowerFaction, 1)
+BA_Ahni.SetFactionRank(CurrentFollowerFaction, 1)
 BeatriceFollowerAlias.ForceRefTo(akspeaker)
 AhniFollowerAlias.ForceRefTo(BA_Ahni)
 PlayerFollowerCount.SetValue(1)
@@ -38,3 +40,4 @@ ReferenceAlias Property SandboxAlias4 Auto
 ReferenceAlias Property SandboxAlias5 Auto
 ReferenceAlias Property SandboxAlias6 Auto
 ReferenceAlias Property SandboxAlias7 Auto
+Faction Property CurrentFollowerFaction  Auto  

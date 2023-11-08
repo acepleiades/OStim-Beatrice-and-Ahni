@@ -8,6 +8,8 @@ Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
 akspeaker.SetPlayerTeammate(false)
 BA_Ahni.SetPlayerTeammate(false)
+akspeaker.SetFactionRank(CurrentFollowerFaction, 0)
+BA_Ahni.SetFactionRank(CurrentFollowerFaction, 0)
 BeatriceFollowerAlias.Clear()
 AhniFollowerAlias.Clear()
 PlayerFollowerCount.SetValue(0)
@@ -21,4 +23,4 @@ Actor Property BA_Ahni Auto
 ReferenceAlias Property BeatriceFollowerAlias Auto
 ReferenceAlias Property AhniFollowerAlias Auto
 GlobalVariable Property PlayerFollowerCount Auto
-
+Faction Property CurrentFollowerFaction  Auto  
