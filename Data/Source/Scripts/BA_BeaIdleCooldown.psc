@@ -2,14 +2,14 @@ Scriptname BA_BeaIdleCooldown extends Quest
 
 GlobalVariable Property GameDaysPassed  Auto
 GlobalVariable Property BA_Cooldown_IdleDialogue  Auto
-GlobalVariable Property BA_CooldownToSet_AhniIdle  Auto
+GlobalVariable Property BA_CooldownToSet_BeaIdle  Auto
 Actor Property myActor Auto
 Faction Property OCR_LoverRelationshipFaction  Auto
 
 Function SetIdleCooldown()
 float currenttime = GameDaysPassed.getvalue()
 float setcooldown = currenttime + BA_Cooldown_IdleDialogue.getvalue()
-BA_CooldownToSet_AhniIdle.setvalue(setcooldown)
+BA_CooldownToSet_BeaIdle.setvalue(setcooldown)
 EndFunction
 
 Function IncreaseIntimacy()
