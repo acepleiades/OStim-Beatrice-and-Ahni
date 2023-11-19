@@ -13,6 +13,7 @@ BA_Ahni.SetFactionRank(CurrentFollowerFaction, 1)
 BeatriceFollowerAlias.ForceRefTo(akspeaker)
 AhniFollowerAlias.ForceRefTo(BA_Ahni)
 PlayerFollowerCount.SetValue(1)
+BA_IsFollowing.SetValue(1)
 
 SandboxAlias.Clear()
 SandboxAlias1.Clear()
@@ -41,3 +42,4 @@ ReferenceAlias Property SandboxAlias5 Auto
 ReferenceAlias Property SandboxAlias6 Auto
 ReferenceAlias Property SandboxAlias7 Auto
 Faction Property CurrentFollowerFaction  Auto  
+GlobalVariable Property BA_IsFollowing Auto

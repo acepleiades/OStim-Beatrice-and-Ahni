@@ -13,6 +13,7 @@ BA_Ahni.SetFactionRank(CurrentFollowerFaction, 0)
 BeatriceFollowerAlias.Clear()
 AhniFollowerAlias.Clear()
 PlayerFollowerCount.SetValue(0)
+BA_IsFollowing.SetValue(0)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -24,3 +25,4 @@ ReferenceAlias Property BeatriceFollowerAlias Auto
 ReferenceAlias Property AhniFollowerAlias Auto
 GlobalVariable Property PlayerFollowerCount Auto
 Faction Property CurrentFollowerFaction  Auto  
+GlobalVariable Property BA_IsFollowing Auto

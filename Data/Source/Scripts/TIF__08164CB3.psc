@@ -13,6 +13,7 @@ akspeaker.SetFactionRank(CurrentFollowerFaction, 1)
 BeatriceFollowerAlias.ForceRefTo(BA_Beatrice)
 AhniFollowerAlias.ForceRefTo(akspeaker)
 PlayerFollowerCount.SetValue(1)
+BA_IsFollowing.SetValue(1)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -24,3 +25,4 @@ ReferenceAlias Property BeatriceFollowerAlias Auto
 ReferenceAlias Property AhniFollowerAlias Auto
 GlobalVariable Property PlayerFollowerCount Auto
 Faction Property CurrentFollowerFaction  Auto  
+GlobalVariable Property BA_IsFollowing Auto

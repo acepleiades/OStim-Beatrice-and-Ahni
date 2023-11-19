@@ -14,6 +14,7 @@ akspeaker.SetFactionRank(CurrentFollowerFaction, 0)
 BeatriceFollowerAlias.Clear()
 AhniFollowerAlias.Clear()
 PlayerFollowerCount.SetValue(0)
+BA_IsFollowing.SetValue(0)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -26,4 +27,4 @@ ReferenceAlias Property BeatriceFollowerAlias  Auto
 ReferenceAlias Property AhniFollowerAlias  Auto  
 GlobalVariable Property PlayerFollowerCount  Auto  
 ReferenceAlias Property Alias_NewSandboxLocation  Auto  
-
+GlobalVariable Property BA_IsFollowing Auto
