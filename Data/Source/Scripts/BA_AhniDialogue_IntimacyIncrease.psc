@@ -1,4 +1,4 @@
-Scriptname BA_BeatriceDialogue_IntimacyIncrease extends Quest  
+Scriptname BA_AhniDialogue_IntimacyIncrease extends Quest  
 
 GlobalVariable Property GameHour  auto
 Actor Property myActor Auto
@@ -13,14 +13,14 @@ float currenthour = GameHour.GetValue()
 float newtime = currenthour + 2
 GameHour.SetValue(newtime)
 Utility.Wait(1)
-Debug.Notification("Spending time with Beatrice was insightful.")
+Debug.Notification("Spending time with Ahni was enjoyable.")
 
 int r = Utility.RandomInt(0, 100)
 if r < 41
 int currentrank = myActor.GetFactionRank(OCR_LoverRelationshipFaction)
 int newrank = currentrank + 1
 myActor.SetFactionRank(OCR_LoverRelationshipFaction, newrank)
-debug.notification("Intimacy with Beatrice has increased.")
+debug.notification("Intimacy with Ahni has increased.")
 endif
 
 Game.EnablePlayerControls()
