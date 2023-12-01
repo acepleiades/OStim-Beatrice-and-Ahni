@@ -1,0 +1,42 @@
+{
+    "target": {
+        "mod": "BeatriceAhni.esp",
+        "formid": "0xA67C"
+    },
+    "moan": {
+        "sound": [
+            {
+                "sound": {
+                    "mod": "BeatriceAhni.esp",
+                    "formid": "0x34B220"
+                },
+                "expression": "moan",
+                "moanIntervalOverride": 0.1
+            }
+        ],
+		"soundMuffled":[
+			{
+				"condition":{
+					"mod": "OStim.esp",
+					"formid": "0xEA6"
+				},
+				"sound":{
+					"mod":"BeatriceAhni.esp",
+					"formid": "0x350326"
+				},
+				"moanIntervalOverride": 0.1
+			}
+		]
+	},
+    "climax": {
+        "sound": [
+            {
+                "sound": {
+                    "mod": "BeatriceAhni.esp",
+                    "formid": "0x34B221"
+                },
+                "expression": "climax"
+            }
+        ]
+    }
+}
