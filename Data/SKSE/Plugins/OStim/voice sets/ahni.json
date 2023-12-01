@@ -7,59 +7,59 @@
         "sound": [
             {
                 "sound": {
-					"comment":"Audible breathing"
+                    "comment": "Audible breathing",
                     "mod": "BeatriceAhni.esp",
                     "formid": "0x35542C"
                 },
-				"condition":{
-					"mod":"OStimCommunityResource.esp",
-					"formid":"0x6D155C"
-				},
+                "condition": {
+                    "mod": "OStimCommunityResource.esp",
+                    "formid": "0x6D155C"
+                },
                 "expression": "moan",
                 "moanIntervalOverride": 0.1
             },
             {
                 "sound": {
-					"comment":"Light moan"
+                    "comment": "Light moan",
                     "mod": "BeatriceAhni.esp",
                     "formid": "0x35542B"
                 },
-				"condition":{
-					"mod":"OStimCommunityResource.esp",
-					"formid":"0x6D155C"
-				},
+                "condition": {
+                    "mod": "OStimCommunityResource.esp",
+                    "formid": "0x6D155C"
+                },
                 "expression": "moan",
                 "moanIntervalOverride": 0.1
             },
             {
                 "sound": {
-					"comment":"Heavy moan"
+                    "comment": "Heavy moan",
                     "mod": "BeatriceAhni.esp",
                     "formid": "0x34B220"
                 },
-				"condition":{
-					"mod":"OStimCommunityResource.esp",
-					"formid":"0x6D155C"
-				},
+                "condition": {
+                    "mod": "OStimCommunityResource.esp",
+                    "formid": "0x6D155C"
+                },
                 "expression": "moan",
                 "moanIntervalOverride": 0.1
             }
         ],
-		"soundMuffled":[
-			{
-				"sound":{
-					"comment":"Muffled moan"
-					"mod":"BeatriceAhni.esp",
-					"formid": "0x350326"
-				},
-				"condition":{
-					"mod":"OStimCommunityResource.esp",
-					"formid": "0x5BA5"
-				},
-				"moanIntervalOverride": 0.1
-			}
-		]
-	},
+        "soundMuffled": [
+            {
+                "sound": {
+                    "comment": "Muffled moan",
+                    "mod": "BeatriceAhni.esp",
+                    "formid": "0x350326"
+                },
+                "condition": {
+                    "mod": "OStimCommunityResource.esp",
+                    "formid": "0x5BA5"
+                },
+                "moanIntervalOverride": 0.1
+            }
+        ]
+    },
     "climax": {
         "sound": [
             {
