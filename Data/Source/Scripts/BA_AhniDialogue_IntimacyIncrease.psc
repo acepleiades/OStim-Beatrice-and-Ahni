@@ -3,6 +3,8 @@ Scriptname BA_AhniDialogue_IntimacyIncrease extends Quest
 GlobalVariable Property GameHour  auto
 Actor Property myActor Auto
 Faction Property OCR_LoverRelationshipFaction  Auto
+SPELL Property BA_Buff_AhnisJoy_Spell  Auto  
+Actor Property playerRef Auto
 
 Function SpendTimeIntimacy()
 
@@ -22,6 +24,8 @@ int newrank = currentrank + 1
 myActor.SetFactionRank(OCR_LoverRelationshipFaction, newrank)
 debug.notification("Intimacy with Ahni has increased.")
 endif
+
+BA_Buff_AhnisJoy_Spell.cast(playerRef, playerRef)
 
 Game.EnablePlayerControls()
 EndFunction
