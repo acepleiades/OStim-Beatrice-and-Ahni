@@ -9,5 +9,6 @@ Event OnLocationChange()
 		float r = Utility.RandomFloat(0, 0.007) ;10 minutes
 		float setcooldown = currenttime + r
 		BA_CooldownToSet_FGUniversal.setvalue(setcooldown)
+		Debug.Notification("BA_LocationChangeApproachCooldown has fired.")
 	endif
 endEvent
