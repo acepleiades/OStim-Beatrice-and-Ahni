@@ -7,6 +7,7 @@ Function Fragment_1(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
 (GetOwningQuest() as CooldownToSet_AhniFGTalk).SetCooldownRefused()
+akspeaker.evaluatepackage()
 ;END CODE
 EndFunction
 ;END FRAGMENT

@@ -7,7 +7,7 @@ Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
 (GetOwningQuest() as CooldownToSet_AhniFGTalk).SetApproachReady()
-;Debug.Notification("BA_ForceGreet_Ahni_Talk: setting approach as ready.")
+Debug.Notification("BA_ForceGreet_Ahni_Talk: setting approach as ready.")
 ;END CODE
 EndFunction
 ;END FRAGMENT
