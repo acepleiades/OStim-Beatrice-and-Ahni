@@ -6,7 +6,7 @@ Scriptname TIF__073AB5CB Extends TopicInfo Hidden
 Function Fragment_1(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-(GetOwningQuest() as CooldownToSet_AhniFGTalk).SetCooldown()
+(GetOwningQuest() as CooldownToSet_AhniFGTalk).SetCooldownRefused()
 ;END CODE
 EndFunction
 ;END FRAGMENT
