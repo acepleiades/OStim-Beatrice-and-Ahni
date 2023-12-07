@@ -7,6 +7,7 @@ Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
 (GetOwningQuest() as BA_AhniIdleCooldown).SetIdleCooldown()
+(GetOwningQuest() as BA_AhniIdleCooldown).SetDailyIdleCooldown()
 (GetOwningQuest() as BA_AhniIdleCooldown).IncreaseIntimacy()
 ;END CODE
 EndFunction

@@ -3,18 +3,13 @@ Scriptname CooldownToSet_AhniFGTalk extends Quest
 GlobalVariable Property GameDaysPassed  auto
 GlobalVariable Property BA_CooldownToSet_FGUniversal  auto
 GlobalVariable Property BA_CooldownToSet_AhniFGTalk  auto
-GlobalVariable Property BA_CooldownToSet_FG_Ready  Auto  
+GlobalVariable Property BA_CooldownToSet_FG_Ready_Ahni  Auto  
+ReferenceAlias Property Ahni_FG_Talk  Auto  
+Actor Property BA_Ahni  Auto  
 
 Function SetApproachReady()
-	BA_CooldownToSet_FG_Ready.setvalue(1)
-EndFunction
-
-Function SetCooldownFailproof()
-	;Setting a small cooldown on the initial forcegreet dialogue appears to be a necessary fail-proofing method
-	float currenttimeFailproof = GameDaysPassed.getvalue()
-	float cooldownFailproof =  0.001
-	float setcooldownFailproof = currenttimeFailproof + cooldownFailproof
-	BA_CooldownToSet_FGUniversal.setvalue(setcooldownFailproof)
+	BA_CooldownToSet_FG_Ready_Ahni.setvalue(1)
+	Ahni_FG_Talk.ForceRefTo(BA_Ahni)
 EndFunction
 
 Function SetCooldownAccepted()
@@ -28,7 +23,8 @@ Function SetCooldownAccepted()
 	float setcooldownUniversal = currenttime + cooldownUniversal
 	BA_CooldownToSet_FGUniversal.setvalue(setcooldownUniversal)
 
-	BA_CooldownToSet_FG_Ready.setvalue(0)
+	BA_CooldownToSet_FG_Ready_Ahni.setvalue(0)
+	Ahni_FG_Talk.Clear()
 EndFunction
 
 
@@ -40,5 +36,6 @@ Function SetCooldownRefused()
 	float setcooldownRefused = currenttimeRefused + cooldownRefused
 	BA_CooldownToSet_AhniFGTalk.setvalue(setcooldownRefused)
 
-	BA_CooldownToSet_FG_Ready.setvalue(0)
+	BA_CooldownToSet_FG_Ready_Ahni.setvalue(0)
+	Ahni_FG_Talk.Clear()
 EndFunction
