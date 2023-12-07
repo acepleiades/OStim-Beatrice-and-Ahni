@@ -5,6 +5,7 @@ Actor Property myActor Auto
 Faction Property OCR_LoverRelationshipFaction  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell  Auto  
 Actor Property playerRef Auto
+GlobalVariable Property BA_GlobalIntimacy_Ahni  Auto  
 
 Function SpendTimeIntimacy()
 
@@ -23,6 +24,7 @@ int currentrank = myActor.GetFactionRank(OCR_LoverRelationshipFaction)
 int newrank = currentrank + 1
 myActor.SetFactionRank(OCR_LoverRelationshipFaction, newrank)
 debug.notification("Intimacy with Ahni has increased.")
+BA_GlobalIntimacy_Ahni.setvalue(myActor.GetFactionRank(OCR_LoverRelationshipFaction))
 endif
 
 BA_Buff_AhnisJoy_Spell.cast(playerRef, playerRef)
