@@ -5,7 +5,6 @@ GlobalVariable Property BA_Cooldown_IdleDialogue  Auto
 GlobalVariable Property BA_CooldownToSet_BeaIdle  Auto
 Actor Property myActor Auto
 Faction Property OCR_LoverRelationshipFaction  Auto
-GlobalVariable Property BA_GlobalIntimacy_Beatrice  Auto  
 
 Function SetIdleCooldown()
 float currenttime = GameDaysPassed.getvalue()
@@ -20,6 +19,5 @@ int currentrank = myActor.GetFactionRank(OCR_LoverRelationshipFaction)
 int newrank = currentrank + 1
 myActor.SetFactionRank(OCR_LoverRelationshipFaction, newrank)
 debug.notification("Intimacy with Beatrice has increased.")
-BA_GlobalIntimacy_Beatrice.setvalue(myActor.GetFactionRank(OCR_LoverRelationshipFaction))
 endif
 EndFunction

@@ -3,9 +3,12 @@ Scriptname BA_BeatriceDialogue_IntimacyIncrease extends Quest
 GlobalVariable Property GameHour  auto
 Actor Property myActor Auto
 Faction Property OCR_LoverRelationshipFaction  Auto
-SPELL Property BA_Buff_BeasInsight_Spell  Auto  
 Actor Property playerRef Auto
-GlobalVariable Property BA_GlobalIntimacy_Beatrice  Auto  
+SPELL Property BA_Buff_BeasInsight_Spell1  Auto  
+SPELL Property BA_Buff_BeasInsight_Spell2  Auto  
+SPELL Property BA_Buff_BeasInsight_Spell3  Auto  
+SPELL Property BA_Buff_BeasInsight_Spell4  Auto  
+SPELL Property BA_Buff_BeasInsight_Spell5  Auto  
 
 Function SpendTimeIntimacy()
 
@@ -24,10 +27,35 @@ int currentrank = myActor.GetFactionRank(OCR_LoverRelationshipFaction)
 int newrank = currentrank + 1
 myActor.SetFactionRank(OCR_LoverRelationshipFaction, newrank)
 debug.notification("Intimacy with Beatrice has increased.")
-BA_GlobalIntimacy_Beatrice.setvalue(myActor.GetFactionRank(OCR_LoverRelationshipFaction))
 endif
 
-BA_Buff_BeasInsight_Spell.cast(playerRef, playerRef)
+int myrank  = myActor.GetFactionRank(OCR_LoverRelationshipFaction)
+
+if myrank  < 20
+BA_Buff_BeasInsight_Spell1.cast(playerRef, playerRef)
+endif
+
+if myrank  >= 20
+	if myrank  < 40
+	BA_Buff_BeasInsight_Spell2.cast(playerRef, playerRef)
+	endif
+endif
+
+if myrank  >= 40
+	if myrank  < 60
+	BA_Buff_BeasInsight_Spell3.cast(playerRef, playerRef)
+	endif
+endif
+
+if myrank  >= 60
+	if myrank  < 80
+	BA_Buff_BeasInsight_Spell4.cast(playerRef, playerRef)
+	endif
+endif
+
+if myrank  > 80
+BA_Buff_BeasInsight_Spell5.cast(playerRef, playerRef)
+endif
 
 Game.EnablePlayerControls()
 EndFunction

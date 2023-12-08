@@ -6,7 +6,6 @@ GlobalVariable Property BA_CooldownToSet_AhniIdle  Auto
 GlobalVariable Property BA_CooldownToSet_AhniIdle_Daily  Auto
 Actor Property myActor Auto
 Faction Property OCR_LoverRelationshipFaction  Auto
-GlobalVariable Property BA_GlobalIntimacy_Ahni  Auto  
 
 Function SetIdleCooldown()
 float currenttime = GameDaysPassed.getvalue()
@@ -27,6 +26,5 @@ int currentrank = myActor.GetFactionRank(OCR_LoverRelationshipFaction)
 int newrank = currentrank + 1
 myActor.SetFactionRank(OCR_LoverRelationshipFaction, newrank)
 debug.notification("Intimacy with Ahni  has increased.")
-BA_GlobalIntimacy_Ahni.setvalue(myActor.GetFactionRank(OCR_LoverRelationshipFaction))
 endif
 EndFunction
