@@ -1,4 +1,4 @@
-Scriptname BA_BeatriceDialogue_IntimacyIncrease extends Quest  
+Scriptname BA_BeatriceDialogue_IntimacyIncrease extends Quest
 
 Actor Property myActor Auto
 Actor Property playerRef Auto
