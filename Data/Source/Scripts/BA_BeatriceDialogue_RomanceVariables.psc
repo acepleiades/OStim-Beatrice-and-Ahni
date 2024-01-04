@@ -27,7 +27,7 @@ function UpdateRomanceProgressionVariables(actor Beatrice)
         endif
     endif
     int currentRomanceProgressionStage = BA_BeatriceDialogue_RomanceProgressionQST.GetStage()
-    MiscUtil.PrintConsole("SetRomanceProgressionStage: Beatrice's current romance progression stage is " + currentRomanceProgressionStage)
+    MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Beatrice's current romance progression stage is " + currentRomanceProgressionStage)
     float BeatriceIntimacy = Beatrice.GetFactionRank(OCR_Lover_Value_Intimacy)
     if currentRomanceProgressionStage < 50 ; Before love confession stage
         if BA_BeatriceDialogue_RomanceProgression_Blockage.GetValue() == 0
@@ -36,20 +36,24 @@ function UpdateRomanceProgressionVariables(actor Beatrice)
                 BA_BeatriceDialogue_RomanceProgressionQST.Start()
                 BA_BeatriceDialogue_RomanceProgressionQST.SetStage(10)
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
-                MiscUtil.PrintConsole("SetRomanceProgressionStage: Romance progression stage is 10.")
+                MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Romance progression has just begun and stage is 10.")
+            ElseIf BeatriceIntimacy >= requiredIntimacy
+                MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Romance progression is currently possible.")
+                BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
             else
+                MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Romance progression is not possible because of low Intimacy.")
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
             endif
             Beatrice.EvaluatePackage()
         ElseIf BA_BeatriceDialogue_RomanceProgression_HasApologized.GetValue() == 1
             BA_BeatriceDialogue_RomanceProgressionQST.SetStage(70)
-            MiscUtil.PrintConsole("SetRomanceProgressionStage: Romance progression stage is 70.")
+            MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Romance progression stage set to 70.")
         Else
             BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
-            MiscUtil.PrintConsole("SetRomanceProgressionStage: Beatrice requires an apology to resume the romance progression.")
+            MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Beatrice requires an apology to resume the romance progression.")
         endif
-    elseIf currentRomanceProgressionStage >= 50 ; Love confession stages
-        MiscUtil.PrintConsole("SetRomanceProgressionStage: Beatrice's romance progression stage is at the point of love confessions.")
+    else ; Love confession stages
+        MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Beatrice's romance progression stage is at the point of love confessions.")
         if currentRomanceProgressionStage != 70 ; Not too upset
             HandleCommitmentScenarios(Beatrice, currentRomanceProgressionStage)
         else ; Beatrice was made upset
@@ -69,11 +73,11 @@ function HandleCommitmentScenarios(actor Beatrice, int currentRomanceProgression
         Else
             BA_BeatriceDialogue_RomanceProgressionQST.SetStage(50) ; Normal love confession
             BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
-            MiscUtil.PrintConsole("SetRomanceProgressionStage: Romance progression stage is 50.")
+            MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Romance progression stage set to 50.")
         endif
     Else
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-        MiscUtil.PrintConsole("SetRomanceProgressionStage: Beatrice requires the player character to not be in an exclusive relationship to resume the romance progression.")
+        MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Beatrice requires the player character to not be in an exclusive relationship to resume the romance progression.")
     endif
 endFunction
 
@@ -86,19 +90,19 @@ function HandleUpsetScenarios(actor Beatrice)
             if OCR_Commitment_PlayerIsInNonexclusiveRelationship.GetValue() == 1  ; Nonexclusive relationship check
                 BA_BeatriceDialogue_RomanceProgressionQST.SetStage(90)
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
-                MiscUtil.PrintConsole("SetRomanceProgressionStage: Romance progression stage is 90.")
+                MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Romance progression stage set to 90.")
             Else
                 BA_BeatriceDialogue_RomanceProgressionQST.SetStage(70)
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
-                MiscUtil.PrintConsole("SetRomanceProgressionStage: Romance progression stage is 70.")
+                MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Romance progression stage set to 70.")
             endif
         Else
             BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-            MiscUtil.PrintConsole("SetRomanceProgressionStage: Beatrice requires the player character to not be in an exclusive relationship to resume the romance progression.")
+            MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Beatrice requires the player character to not be in an exclusive relationship to resume the romance progression.")
         endif
     Else
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-        MiscUtil.PrintConsole("SetRomanceProgressionStage: Beatrice requires the player character to be more attractive to resume the romance progression.")
+        MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Beatrice requires the player character to be more attractive to resume the romance progression.")
     endif
 endFunction
 
@@ -107,9 +111,9 @@ function CheckAttractionAndSetStage(actor Beatrice, int stage)
     if BeatriceAttraction > 1
         BA_BeatriceDialogue_RomanceProgressionQST.SetStage(stage)
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
-        MiscUtil.PrintConsole("SetRomanceProgressionStage: Romance progression stage is " + stage)
+        MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Romance progression stage set to " + stage)
     Else
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-        MiscUtil.PrintConsole("SetRomanceProgressionStage: Beatrice requires the player character to be more attractive to resume the romance progression.")
+        MiscUtil.PrintConsole("BA_BeatriceDialogue_RomanceVariables: Beatrice requires the player character to be more attractive to resume the romance progression.")
     endif
 endFunction
