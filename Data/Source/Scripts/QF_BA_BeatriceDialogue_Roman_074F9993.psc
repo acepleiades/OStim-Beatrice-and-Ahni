@@ -14,7 +14,8 @@ Quest __temp = self as Quest
 BA_BeatriceDialogue_RomanceVariables kmyQuest = __temp as BA_BeatriceDialogue_RomanceVariables
 ;END AUTOCAST
 ;BEGIN CODE
-kmyQuest.SetRomanceProgressionStage(Alias_Beatrice.GetActorReference())
+Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has started.")
+kmyQuest.UpdateRomanceProgressionVariables(Alias_Beatrice.GetActorReference())
 ;END CODE
 EndFunction
 ;END FRAGMENT

@@ -1,5 +1,6 @@
 Scriptname BA_BeatriceRomanceProgression extends Quest  
 
+Faction Property OCR_Lover_PlayerCommittedRelationshipFaction  Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_Blockage  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_HasApologized  Auto
@@ -7,6 +8,7 @@ GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_ProgressionPossib
 Quest Property BA_BeatriceDialogue_RomanceProgressionQST  Auto
 
 Function ResponsePositive(actor Beatrice)
+    ;(GetOwningQuest() as BA_BeatriceRomanceProgression).ResponsePositive(akspeaker)
     int BeatriceIntimacy = Beatrice.GetFactionRank(OCR_Lover_Value_Intimacy)
     if BeatriceIntimacy < 100
         int newIntimacy = BeatriceIntimacy + 8
@@ -23,6 +25,7 @@ Function ResponsePositive(actor Beatrice)
 endFunction
 
 Function ResponseNeutral(actor Beatrice)
+    ;(GetOwningQuest() as BA_BeatriceRomanceProgression).ResponseNeutral(akspeaker)
     int BeatriceIntimacy = Beatrice.GetFactionRank(OCR_Lover_Value_Intimacy)
     if BeatriceIntimacy < 100
         int newIntimacy = BeatriceIntimacy + 4
@@ -39,16 +42,36 @@ Function ResponseNeutral(actor Beatrice)
 endFunction
 
 Function ResponseUpset(actor Beatrice)
+    ;(GetOwningQuest() as BA_BeatriceRomanceProgression).ResponseUpset(akspeaker)
     BA_BeatriceDialogue_RomanceProgression_Blockage.SetValue(1)
-    Debug.Notification("Beatrice is upset.")
     int currentRomanceProgressionStage = BA_BeatriceDialogue_RomanceProgressionQST.GetStage()
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
     BA_BeatriceDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
+    Debug.Notification("Beatrice is upset.")
+endFunction
+
+Function ConfessionAccept(actor actor1)
+    ;(GetOwningQuest() as BA_BeatriceRomanceProgression).ConfessionAccept(akspeaker)
+    actor1.AddToFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
+    Debug.Notification("Beatrice has become your committed lover.")
+    BA_BeatriceDialogue_RomanceProgressionQST.SetStage(100)
+endFunction
+
+Function ConfessionReject()
+    ;(GetOwningQuest() as BA_BeatriceRomanceProgression).ConfessionReject()
+    BA_BeatriceDialogue_RomanceProgressionQST.SetStage(100)
 endFunction
 
 Function Apologize()
-    BA_BeatriceDialogue_RomanceProgression_HasApologized.SetValue(1)
+    ;(GetOwningQuest() as BA_BeatriceRomanceProgression).Apologize()
     BA_BeatriceDialogue_RomanceProgression_Blockage.SetValue(0)
+    BA_BeatriceDialogue_RomanceProgression_HasApologized.SetValue(1)
     BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
+    Debug.Notification("Beatrice accepts your apology.")
+endFunction
+
+Function SetStageToConfession()
+    ;(GetOwningQuest() as BA_BeatriceRomanceProgression).SetStageToConfession()
+    BA_BeatriceDialogue_RomanceProgressionQST.SetStage(50)
 endFunction
