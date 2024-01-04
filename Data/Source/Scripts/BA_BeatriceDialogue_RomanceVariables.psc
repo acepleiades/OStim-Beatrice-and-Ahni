@@ -1,5 +1,6 @@
 Scriptname BA_BeatriceDialogue_RomanceVariables extends Quest  
 
+Faction Property OCR_Lover_ExcludedFaction  Auto
 Faction Property OCR_Lover_PlayerCommittedRelationshipFaction  Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
 Faction Property OCR_Lover_Value_Love  Auto
@@ -14,13 +15,13 @@ Quest Property BA_BeatriceDialogue_RomanceProgressionQST  Auto
 Quest Property BA_BeatriceDialogue_RomanceVariablesQST  Auto
 
 function UpdateRomanceProgressionVariables(actor Beatrice)
-    BA_BeatriceDialogue_RomanceProgressionQST.Start()
     if BA_BeatriceDialogue_RomanceProgression_Reset_Shown.GetValue() == 0
         if Beatrice.GetFactionRank(OCR_Lover_Value_Love) > 0 || Beatrice.IsInFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
             Int iChoice = BA_BeatriceDialogue_RomanceProgression_Reset.Show()
             if iChoice == 0
-                Beatrice.SetFactionRank(OCR_Lover_Value_Love, 0)
+                Beatrice.AddToFaction(OCR_Lover_ExcludedFaction)
                 Beatrice.RemoveFromFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
+                Beatrice.SetFactionRank(OCR_Lover_Value_Love, 0)
             endIf
             BA_BeatriceDialogue_RomanceProgression_Reset_Shown.SetValue(1)
         endif
