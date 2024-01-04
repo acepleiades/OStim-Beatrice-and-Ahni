@@ -14,6 +14,7 @@ Quest Property BA_BeatriceDialogue_RomanceProgressionQST  Auto
 Quest Property BA_BeatriceDialogue_RomanceVariablesQST  Auto
 
 function UpdateRomanceProgressionVariables(actor Beatrice)
+    BA_BeatriceDialogue_RomanceProgressionQST.Start()
     if BA_BeatriceDialogue_RomanceProgression_Reset_Shown.GetValue() == 0
         if Beatrice.GetFactionRank(OCR_Lover_Value_Love) > 0 || Beatrice.IsInFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
             Int iChoice = BA_BeatriceDialogue_RomanceProgression_Reset.Show()
