@@ -1,12 +1,11 @@
 Scriptname BA_BeatriceRomanceProgression extends Quest  
 
-Actor Property PlayerRef  Auto
-Armor Property BA_BeatriceNecklace  Auto
 Faction Property OCR_Lover_PlayerCommittedRelationshipFaction  Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_Blockage  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_GiftGiven  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_HasApologized  Auto
+ObjectReference Property Gift Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_ProgressionPossible  Auto
 Quest Property BA_BeatriceDialogue_RomanceProgressionQST  Auto
 
@@ -57,8 +56,9 @@ endFunction
 Function BeatriceGift()
     ;(GetOwningQuest() as BA_BeatriceRomanceProgression).BeatriceGift()
     if BA_BeatriceDialogue_RomanceProgression_GiftGiven.GetValue() == 0
-        PlayerRef.AddItem(BA_BeatriceNecklace, 1)
+        Game.GetPlayer().AddItem(Gift)
         BA_BeatriceDialogue_RomanceProgression_GiftGiven.SetValue(1)
+        Debug.Notification("Trying to give this fucking gift")
     endif
 endfunction
 
