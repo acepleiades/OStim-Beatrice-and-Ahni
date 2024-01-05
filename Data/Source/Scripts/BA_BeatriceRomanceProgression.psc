@@ -1,8 +1,11 @@
 Scriptname BA_BeatriceRomanceProgression extends Quest  
 
+Actor Property PlayerRef  Auto
+Armor Property BA_BeatriceNecklace  Auto
 Faction Property OCR_Lover_PlayerCommittedRelationshipFaction  Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_Blockage  Auto
+GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_GiftGiven  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_HasApologized  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_ProgressionPossible  Auto
 Quest Property BA_BeatriceDialogue_RomanceProgressionQST  Auto
@@ -48,8 +51,16 @@ Function ResponseUpset(actor Beatrice)
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
     BA_BeatriceDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-    Debug.Notification("Beatrice is upset.")
+    Debug.Notification("Beatrice is unhappy.")
 endFunction
+
+Function BeatriceGift()
+    ;(GetOwningQuest() as BA_BeatriceRomanceProgression).BeatriceGift()
+    if BA_BeatriceDialogue_RomanceProgression_GiftGiven.GetValue() == 0
+        PlayerRef.AddItem(BA_BeatriceNecklace, 1)
+        BA_BeatriceDialogue_RomanceProgression_GiftGiven.SetValue(1)
+    endif
+endfunction
 
 Function ConfessionAccept(actor actor1)
     ;(GetOwningQuest() as BA_BeatriceRomanceProgression).ConfessionAccept(akspeaker)
