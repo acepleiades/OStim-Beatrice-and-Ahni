@@ -70,9 +70,3 @@ Function Apologize()
     BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
     Debug.Notification("Beatrice accepts your apology.")
 endFunction
-
-Function SetStageToConfession()
-    ;(GetOwningQuest() as BA_BeatriceRomanceProgression).SetStageToConfession()
-    BA_BeatriceDialogue_RomanceProgression_Blockage.SetValue(0)
-    BA_BeatriceDialogue_RomanceProgressionQST.SetStage(50)
-endFunction
