@@ -1,5 +1,7 @@
 Scriptname BA_BeatriceDialogue_Lover extends Quest  
 
+Faction Property OCR_Lover_AcceptsMultiplePartnersFaction  Auto
+Faction Property OCR_OStimScenes_3PPCandidateFaction  Auto
 Quest Property BA_BeatriceDialogue_LoverQST Auto
 OCR_PrivateCellsUtil Property Util Auto
 
@@ -42,11 +44,18 @@ Function Kiss(actor actor1)
 endfunction
 
 function InnVisit(actor actor1)
-	;(GetOwningQuest() as BA_BeatriceDialogue_Camp).InnVisit(akspeaker)
+	;(GetOwningQuest() as BA_BeatriceDialogue_Lover).InnVisit(akspeaker)
 	Util.GoToPrivateCell_Inn(actor1)
 endfunction
 
 Function UnrestrictedActions(actor actor1)
-	;(GetOwningQuest() as BA_BeatriceDialogue_Camp).UnrestrictedActions(akspeaker)
+	;(GetOwningQuest() as BA_BeatriceDialogue_Lover).UnrestrictedActions(akspeaker)
 	(BA_BeatriceDialogue_LoverQST as OCR_OStimScenesUtil).OCR_StartScene(actor1)
+endfunction
+
+Function TalkIntoAcceptingMultiplePartners(actor actor1)
+	;(GetOwningQuest() as BA_BeatriceDialogue_Lover).TalkIntoAcceptingMultiplePartners(akspeaker)
+	Debug.Notification("Beatrice has come to accept you seeing other partners.")
+	actor1.AddToFaction(OCR_Lover_AcceptsMultiplePartnersFaction)
+	actor1.AddToFaction(OCR_OStimScenes_3PPCandidateFaction)
 endfunction
