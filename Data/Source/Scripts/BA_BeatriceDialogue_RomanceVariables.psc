@@ -4,6 +4,7 @@ Faction Property OCR_Lover_ExcludedFaction  Auto
 Faction Property OCR_Lover_PlayerCommittedRelationshipFaction  Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
 Faction Property OCR_Lover_Value_Love  Auto
+Faction Property OCR_OStimScenes_3PPCandidateFaction  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_Blockage  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_HasApologized  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_ProgressionPossible  Auto
@@ -21,6 +22,7 @@ function UpdateRomanceProgressionVariables(actor Beatrice)
             if iChoice == 0
                 Beatrice.AddToFaction(OCR_Lover_ExcludedFaction)
                 Beatrice.RemoveFromFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
+                Beatrice.RemoveFromFaction(OCR_OStimScenes_3PPCandidateFaction)
                 Beatrice.SetFactionRank(OCR_Lover_Value_Love, 0)
             endIf
             BA_BeatriceDialogue_RomanceProgression_Reset_Shown.SetValue(1)
