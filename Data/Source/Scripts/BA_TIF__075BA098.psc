@@ -6,7 +6,7 @@ Scriptname BA_TIF__075BA098 Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-Debug.Notification("You must be in city or a town.")
+Debug.Notification("Location must be: a town, city, owned house or inn.")
 ;END CODE
 EndFunction
 ;END FRAGMENT
