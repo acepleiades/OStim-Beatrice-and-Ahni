@@ -41,17 +41,14 @@ function UpdateRomanceProgressionVariables(actor Beatrice)
                 BA_BeatriceDialogue_RomanceProgressionQST.SetStage(10)
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Beatrice's Romance Progression: progression has just begun and stage is 10.")
-                Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
                 BA_BeatriceDialogue_RomanceVariablesQST.Stop()
             ElseIf BeatriceIntimacy >= requiredIntimacy
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Beatrice's Romance Progression: progression is currently possible.")
-                Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
                 BA_BeatriceDialogue_RomanceVariablesQST.Stop()
             else
                 MiscUtil.PrintConsole("Beatrice's Romance Progression: progression is not possible because of low Intimacy.")
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-                Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
                 BA_BeatriceDialogue_RomanceVariablesQST.Stop()
             endif
             Beatrice.EvaluatePackage()
@@ -60,7 +57,6 @@ function UpdateRomanceProgressionVariables(actor Beatrice)
         Else
             BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
             MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice requires an apology to resume the progression.")
-            Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
             BA_BeatriceDialogue_RomanceVariablesQST.Stop()
         endif
     else ; Love confession stages
@@ -83,13 +79,12 @@ function HandleCommitmentScenarios(actor Beatrice, int currentRomanceProgression
             BA_BeatriceDialogue_RomanceProgressionQST.SetStage(50) ; Normal love confession
             BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
             MiscUtil.PrintConsole("Beatrice's Romance Progression: progression stage set to 50.")
-            Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
+            
             BA_BeatriceDialogue_RomanceVariablesQST.Stop()
         endif
     Else
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
         MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice requires the player character to not be in an exclusive relationship to resume the romance progression.")
-        Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
         BA_BeatriceDialogue_RomanceVariablesQST.Stop()
     endif
 endFunction
@@ -107,31 +102,26 @@ function HandleUpsetScenarios(actor Beatrice)
                 BA_BeatriceDialogue_RomanceProgressionQST.SetStage(90)
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Beatrice's Romance Progression: progression stage set to 90.")
-                Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
                 BA_BeatriceDialogue_RomanceVariablesQST.Stop()
             Else
                 BA_BeatriceDialogue_RomanceProgressionQST.Reset()
                 BA_BeatriceDialogue_RomanceProgressionQST.SetStage(70)
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Beatrice's Romance Progression: progression stage set to 70.")
-                Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
                 BA_BeatriceDialogue_RomanceVariablesQST.Stop()
             endif
         Else
             BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
             MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice requires the player character to not be in an exclusive relationship to resume the progression.")
-            Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
             BA_BeatriceDialogue_RomanceVariablesQST.Stop()
         endif
     ElseIf BeatriceAttraction < 1.3
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
         MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice requires the player character to be more attractive to resume the progression.")
-        Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
         BA_BeatriceDialogue_RomanceVariablesQST.Stop()
     Else
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
         MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice requires higher Intimacy to resume the progression.")
-        Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
         BA_BeatriceDialogue_RomanceVariablesQST.Stop()
     endif
 endFunction
@@ -145,17 +135,14 @@ function CheckAttractionAndSetStage(actor Beatrice, int stage)
         BA_BeatriceDialogue_RomanceProgressionQST.SetStage(stage)
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
         MiscUtil.PrintConsole("Beatrice's Romance Progression: Romance progression stage set to " + stage)
-        Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
         BA_BeatriceDialogue_RomanceVariablesQST.Stop()
     ElseIf BeatriceAttraction < 1.15
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
         MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice requires the player character to be more attractive to resume the progression.")
-        Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
         BA_BeatriceDialogue_RomanceVariablesQST.Stop()
     Else
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
         MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice requires higher Intimacy to resume the progression.")
-        Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has stopped.")
         BA_BeatriceDialogue_RomanceVariablesQST.Stop()
     endif
 endFunction

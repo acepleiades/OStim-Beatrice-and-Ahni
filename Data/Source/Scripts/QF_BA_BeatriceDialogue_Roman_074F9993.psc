@@ -9,7 +9,6 @@ Quest __temp = self as Quest
 BA_BeatriceDialogue_RomanceVariables kmyQuest = __temp as BA_BeatriceDialogue_RomanceVariables
 ;END AUTOCAST
 ;BEGIN CODE
-Debug.Notification("BA_BeatriceDialogue_RomanceVariablesQST has started.")
 kmyQuest.UpdateRomanceProgressionVariables(Beatrice)
 ;END CODE
 EndFunction

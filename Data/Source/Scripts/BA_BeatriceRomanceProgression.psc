@@ -58,7 +58,6 @@ Function BeatriceGift()
     if BA_BeatriceDialogue_RomanceProgression_GiftGiven.GetValue() == 0
         Game.GetPlayer().AddItem(Gift)
         BA_BeatriceDialogue_RomanceProgression_GiftGiven.SetValue(1)
-        Debug.Notification("Trying to give this fucking gift")
     endif
 endfunction
 
