@@ -26,5 +26,16 @@ Function IncreaseIntimacy()
 		int newrank = currentrank + 2
 		myActor.SetFactionRank(OCR_Lover_Value_Intimacy, newrank)
 		debug.notification("Intimacy with Ahni  has increased.")
+        if currentrank < 10 && newrank >= 10
+            debug.notification("Ahni seems more open to you.")
+        elseif currentrank < 20 && newrank >= 20
+            debug.notification("You sense a stronger connection with Ahni.")
+        elseif currentrank < 30 && newrank >= 30
+            debug.notification("Ahni's affection toward you is more evident.")
+        elseif currentrank < 40 && newrank >= 40
+            debug.notification("There's a noticeable warmth in Ahni's manner toward you.")
+        elseif currentrank < 50 && newrank >= 50
+            debug.notification("Ahni's eyes reflect a deep affection toward you.")
+        endif
 	endif
 EndFunction
