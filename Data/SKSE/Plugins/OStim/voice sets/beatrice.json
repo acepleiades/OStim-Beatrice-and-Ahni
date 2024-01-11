@@ -15,7 +15,6 @@
                     "mod": "OStimCommunityResource.esp",
                     "formid": "0x5BA8"
                 },
-                "expression": "moan",
                 "moanIntervalOverride": 0.1
             },
             {
@@ -28,7 +27,7 @@
                     "mod": "OStimCommunityResource.esp",
                     "formid": "0x5BA7"
                 },
-                "expression": "moan",
+                "expression": "OCR_moan",
                 "moanIntervalOverride": 0.1
             },
             {
@@ -41,7 +40,7 @@
                     "mod": "OStimCommunityResource.esp",
                     "formid": "0x5BA6"
                 },
-                "expression": "moan",
+                "expression": "OCR_moan",
                 "moanIntervalOverride": 0.1
             }
         ],
@@ -54,7 +53,7 @@
                 },
                 "condition": {
                     "mod": "OStimCommunityResource.esp",
-                    "formid": "0x5BA5"
+                    "formid": "0xAAE5"
                 },
                 "moanIntervalOverride": 0.1
             }
