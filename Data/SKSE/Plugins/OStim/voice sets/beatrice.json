@@ -1,0 +1,74 @@
+{
+    "target": {
+        "mod": "BeatriceAhni.esp",
+        "formid": "0x7ED8"
+    },
+    "moan": {
+        "sound": [
+            {
+                "sound": {
+                    "comment": "Audible breathing",
+                    "mod": "BeatriceAhni.esp",
+                    "formid": "0x5FBE1E"
+                },
+                "condition": {
+                    "mod": "OStimCommunityResource.esp",
+                    "formid": "0x5BA8"
+                },
+                "expression": "moan",
+                "moanIntervalOverride": 0.1
+            },
+            {
+                "sound": {
+                    "comment": "Light moan",
+                    "mod": "BeatriceAhni.esp",
+                    "formid": "0x5FBE21"
+                },
+                "condition": {
+                    "mod": "OStimCommunityResource.esp",
+                    "formid": "0x5BA7"
+                },
+                "expression": "moan",
+                "moanIntervalOverride": 0.1
+            },
+            {
+                "sound": {
+                    "comment": "Heavy moan",
+                    "mod": "BeatriceAhni.esp",
+                    "formid": "0x5FBE20"
+                },
+                "condition": {
+                    "mod": "OStimCommunityResource.esp",
+                    "formid": "0x5BA6"
+                },
+                "expression": "moan",
+                "moanIntervalOverride": 0.1
+            }
+        ],
+        "soundMuffled": [
+            {
+                "sound": {
+                    "comment": "Muffled moan",
+                    "mod": "BeatriceAhni.esp",
+                    "formid": "0x5FBE22"
+                },
+                "condition": {
+                    "mod": "OStimCommunityResource.esp",
+                    "formid": "0x5BA5"
+                },
+                "moanIntervalOverride": 0.1
+            }
+        ]
+    },
+    "climax": {
+        "sound": [
+            {
+                "sound": {
+                    "mod": "BeatriceAhni.esp",
+                    "formid": "0x5FBE1F"
+                },
+                "expression": "climax"
+            }
+        ]
+    }
+}
