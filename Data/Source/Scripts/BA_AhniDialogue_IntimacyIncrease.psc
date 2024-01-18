@@ -27,6 +27,7 @@ Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
         int currentrank = myActor.GetFactionRank(OCR_Lover_Value_Intimacy)
         int newrank = currentrank + 2
         myActor.SetFactionRank(OCR_Lover_Value_Intimacy, newrank)
+        MiscUtil.PrintConsole("Ahni's Intimacy value was " + currentrank + " and is now " + newrank)
         debug.notification("Intimacy with Ahni has increased.")
         if currentrank < 10 && newrank >= 10
             debug.notification("Ahni seems more open to you.")
