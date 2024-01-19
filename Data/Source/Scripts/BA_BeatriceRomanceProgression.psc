@@ -1,12 +1,14 @@
 Scriptname BA_BeatriceRomanceProgression extends Quest  
 
+Faction Property OCR_Lover_AcceptsMultiplePartnersFaction  Auto
 Faction Property OCR_Lover_PlayerCommittedRelationshipFaction  Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
+Faction Property OCR_OStimScenes_3PPCandidateFaction  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_Blockage  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_GiftGiven  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_HasApologized  Auto
-ObjectReference Property Gift Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_ProgressionPossible  Auto
+ObjectReference Property Gift Auto
 Quest Property BA_BeatriceDialogue_RomanceProgressionQST  Auto
 
 Function ResponsePositive(actor Beatrice)
@@ -81,9 +83,8 @@ Function Apologize()
     Debug.Notification("Beatrice accepts your apology.")
 endFunction
 
-function SetStageToConfession()
-    ;(GetOwningQuest() as BA_BeatriceRomanceProgression).SetStageToConfession()
-    BA_BeatriceDialogue_RomanceProgression_Blockage.SetValue(0)
-    BA_BeatriceDialogue_RomanceProgressionQST.Reset()
-    BA_BeatriceDialogue_RomanceProgressionQST.SetStage(50)
+function AcceptMultiplePartners(actor actor1)
+    ;(GetOwningQuest() as BA_BeatriceRomanceProgression).AcceptMultiplePartners(akspeaker)
+    actor1.AddToFaction(OCR_Lover_AcceptsMultiplePartnersFaction)
+    actor1.AddToFaction(OCR_OStimScenes_3PPCandidateFaction)
 endfunction
