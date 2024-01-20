@@ -8,7 +8,7 @@ GlobalVariable property GameYear auto
 OCR_PrivateCellsUtil Property Util Auto
 
 function Camp(actor actor1)
-	;(GetOwningQuest() as BA_AhniDialogue_Camp).Camp(akspeaker)
-	Util.FollowerCamping(actor1)
-	OCR_GlobalFunctions.AdvanceTimeByHours(1, GameHour, GameDay, GameDaysPassed, GameMonth, GameYear)
+    ;(GetOwningQuest() as BA_AhniDialogue_Camp).Camp(akspeaker)
+    Util.FollowerCamping(actor1)
+    OCR_GlobalFunctions.AdvanceTimeByHours(1, GameHour, GameDay, GameDaysPassed, GameMonth, GameYear)
 endfunction
