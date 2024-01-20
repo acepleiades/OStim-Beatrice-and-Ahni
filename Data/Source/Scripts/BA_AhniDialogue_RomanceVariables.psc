@@ -65,6 +65,10 @@ function UpdateRomanceProgressionVariables(actor Ahni)
             BA_AhniDialogue_RomanceVariablesQST.Stop()
         endif
     else ; Love confession stages
+        if BA_AhniDialogue_RomanceProgression_Blockage.GetValue() == 1 && BA_AhniDialogue_RomanceProgression_HasApologized.GetValue() == 1
+            ;Ensure that romance progression is at upset stage
+            currentRomanceProgressionStage = 70
+        endif
         if currentRomanceProgressionStage != 70 ; Romance subject is not upset
             HandleCommitmentScenarios(Ahni, currentRomanceProgressionStage)
         else ; Romance subject is upset
@@ -132,7 +136,7 @@ endFunction
 
 function CheckAttractionAndSetStage(actor Ahni, int stage)
     float AhniAttraction = (BA_AhniDialogue_RomanceVariablesQST as OCR_AttractionUtil).CalculateNPCAttraction(Ahni)
-    MiscUtil.PrintConsole("Ahni's Romance Progression: Ahni's calculated attraction is" + AhniAttraction)
+    MiscUtil.PrintConsole("Ahni's Romance Progression: Ahni's calculated attraction is " + AhniAttraction)
     float AhniIntimacy = Ahni.GetFactionRank(OCR_Lover_Value_Intimacy)
     if AhniAttraction >= 1.0 && AhniIntimacy >= 50
         BA_AhniDialogue_RomanceProgressionQST.Reset()

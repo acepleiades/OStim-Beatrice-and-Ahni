@@ -64,6 +64,10 @@ function UpdateRomanceProgressionVariables(actor Beatrice)
             BA_BeatriceDialogue_RomanceVariablesQST.Stop()
         endif
     else ; Love confession stages
+        if BA_BeatriceDialogue_RomanceProgression_Blockage.GetValue() == 1 && BA_BeatriceDialogue_RomanceProgression_HasApologized.GetValue() == 1
+            ;Ensure that romance progression is at upset stage
+            currentRomanceProgressionStage = 70
+        endif
         if currentRomanceProgressionStage != 70 ; Romance subject is not upset
             HandleCommitmentScenarios(Beatrice, currentRomanceProgressionStage)
         else ; Romance subject is upset
@@ -131,7 +135,7 @@ endFunction
 
 function CheckAttractionAndSetStage(actor Beatrice, int stage)
     float BeatriceAttraction = (BA_BeatriceDialogue_RomanceVariablesQST as OCR_AttractionUtil).CalculateNPCAttraction(Beatrice)
-    MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice's calculated attraction is" + BeatriceAttraction)
+    MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice's calculated attraction is " + BeatriceAttraction)
     float BeatriceIntimacy = Beatrice.GetFactionRank(OCR_Lover_Value_Intimacy)
     if BeatriceAttraction >= 1.15 && BeatriceIntimacy >= 50
         BA_BeatriceDialogue_RomanceProgressionQST.Reset()
