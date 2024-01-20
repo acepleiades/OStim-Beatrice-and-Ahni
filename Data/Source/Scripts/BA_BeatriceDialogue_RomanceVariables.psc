@@ -12,6 +12,7 @@ GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_ProgressionPossib
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_Reset_Shown  Auto
 GlobalVariable Property OCR_Commitment_PlayerIsInExclusiveRelationship  Auto
 GlobalVariable Property OCR_Commitment_PlayerIsInNonexclusiveRelationship  Auto
+GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
 Message Property BA_BeatriceDialogue_RomanceProgression_Reset Auto
 Quest Property BA_BeatriceDialogue_RomanceProgressionQST  Auto
 Quest Property BA_BeatriceDialogue_RomanceVariablesQST  Auto
@@ -35,7 +36,10 @@ function UpdateRomanceProgressionVariables(actor Beatrice)
     float BeatriceIntimacy = Beatrice.GetFactionRank(OCR_Lover_Value_Intimacy)
     if currentRomanceProgressionStage < 50 ; Before love confession stage
         if BA_BeatriceDialogue_RomanceProgression_Blockage.GetValue() == 0
-            int requiredIntimacy = (currentRomanceProgressionStage / 10) * 10 + 10
+            int requiredIntimacy = currentRomanceProgressionStage
+            if requiredIntimacy == 0
+                requiredIntimacy = 10
+            endif
             if BeatriceIntimacy >= requiredIntimacy && !BA_BeatriceDialogue_RomanceProgressionQST.IsRunning()
                 BA_BeatriceDialogue_RomanceProgressionQST.Start()
                 BA_BeatriceDialogue_RomanceProgressionQST.SetStage(10)
@@ -79,7 +83,6 @@ function HandleCommitmentScenarios(actor Beatrice, int currentRomanceProgression
             BA_BeatriceDialogue_RomanceProgressionQST.SetStage(50) ; Normal love confession
             BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
             MiscUtil.PrintConsole("Beatrice's Romance Progression: progression stage set to 50.")
-            
             BA_BeatriceDialogue_RomanceVariablesQST.Stop()
         endif
     Else

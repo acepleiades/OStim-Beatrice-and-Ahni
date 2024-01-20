@@ -8,6 +8,7 @@ GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_Blockage  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_GiftGiven  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_HasApologized  Auto
 GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_ProgressionPossible  Auto
+GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
 ObjectReference Property Gift Auto
 Quest Property BA_BeatriceDialogue_RomanceProgressionQST  Auto
 
@@ -65,6 +66,7 @@ endfunction
 
 Function ConfessionAccept(actor actor1)
     ;(GetOwningQuest() as BA_BeatriceRomanceProgression).ConfessionAccept(akspeaker)
+    OCR_RomanceProgression_NoMoreInThisInstance.SetValue(1)
     actor1.AddToFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
     Debug.Notification("Beatrice has become your committed lover.")
     BA_BeatriceDialogue_RomanceProgressionQST.SetStage(100)

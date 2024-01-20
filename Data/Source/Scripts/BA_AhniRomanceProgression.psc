@@ -8,6 +8,7 @@ GlobalVariable Property BA_AhniDialogue_RomanceProgression_Blockage  Auto
 GlobalVariable Property BA_AhniDialogue_RomanceProgression_GiftGiven  Auto
 GlobalVariable Property BA_AhniDialogue_RomanceProgression_HasApologized  Auto
 GlobalVariable Property BA_AhniDialogue_RomanceProgression_ProgressionPossible  Auto
+GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
 OCR_OStimScenesUtil Property Util Auto
 Quest Property BA_AhniDialogue_RomanceProgressionQST  Auto
 
@@ -62,6 +63,7 @@ endfunction
 
 Function ConfessionAccept(actor actor1)
     ;(GetOwningQuest() as BA_AhniRomanceProgression).ConfessionAccept(akspeaker)
+    OCR_RomanceProgression_NoMoreInThisInstance.SetValue(1)
     actor1.AddToFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
     actor1.AddToFaction(OCR_Lover_AcceptsMultiplePartnersFaction)
     actor1.AddToFaction(OCR_OStimScenes_3PPCandidateFaction)
