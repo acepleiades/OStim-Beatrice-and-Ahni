@@ -6,8 +6,7 @@ Scriptname BA_TIF__073F240C Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-(GetOwningQuest() as CooldownToSet_AhniFGTalk).SetApproachReady()
-;Debug.Notification("BA_ForceGreet_Ahni_Talk: setting approach as ready.")
+(GetOwningQuest() as BA_AhniAutonomy).SetReady_Talk()
 ;END CODE
 EndFunction
 ;END FRAGMENT

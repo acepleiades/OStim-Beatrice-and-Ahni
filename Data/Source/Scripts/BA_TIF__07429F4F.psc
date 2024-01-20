@@ -6,8 +6,7 @@ Scriptname BA_TIF__07429F4F Extends TopicInfo Hidden
 Function Fragment_1(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-(GetOwningQuest() as CooldownToSet_AhniFGTalk).SetCooldownRefused()
-akspeaker.evaluatepackage()
+(GetOwningQuest() as BA_AhniAutonomy).SetCooldownRefused_Talk()
 ;END CODE
 EndFunction
 ;END FRAGMENT
