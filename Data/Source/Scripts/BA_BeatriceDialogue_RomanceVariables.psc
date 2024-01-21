@@ -100,7 +100,7 @@ function HandleUpsetScenarios(actor Beatrice)
     float BeatriceAttraction = (BA_BeatriceDialogue_RomanceVariablesQST as OCR_AttractionUtil).CalculateNPCAttraction(Beatrice)
     MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice's calculated attraction is" + BeatriceAttraction)
     float BeatriceIntimacy = Beatrice.GetFactionRank(OCR_Lover_Value_Intimacy)
-    if BeatriceAttraction >= 1.3 && BeatriceIntimacy >= 50
+    if BeatriceAttraction >= 1.15 && BeatriceIntimacy >= 50
         (BA_BeatriceDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
         if OCR_Commitment_PlayerIsInExclusiveRelationship.GetValue() == 0 ; Exclusive relationship check
             (BA_BeatriceDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
@@ -122,7 +122,7 @@ function HandleUpsetScenarios(actor Beatrice)
             MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice requires the player character to not be in an exclusive relationship to resume the progression.")
             BA_BeatriceDialogue_RomanceVariablesQST.Stop()
         endif
-    ElseIf BeatriceAttraction < 1.3
+    ElseIf BeatriceAttraction < 1.15
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
         MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice requires the player character to be more attractive to resume the progression.")
         BA_BeatriceDialogue_RomanceVariablesQST.Stop()
@@ -137,13 +137,13 @@ function CheckAttractionAndSetStage(actor Beatrice, int stage)
     float BeatriceAttraction = (BA_BeatriceDialogue_RomanceVariablesQST as OCR_AttractionUtil).CalculateNPCAttraction(Beatrice)
     MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice's calculated attraction is " + BeatriceAttraction)
     float BeatriceIntimacy = Beatrice.GetFactionRank(OCR_Lover_Value_Intimacy)
-    if BeatriceAttraction >= 1.15 && BeatriceIntimacy >= 50
+    if BeatriceAttraction >= 1.0 && BeatriceIntimacy >= 50
         BA_BeatriceDialogue_RomanceProgressionQST.Reset()
         BA_BeatriceDialogue_RomanceProgressionQST.SetStage(stage)
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
         MiscUtil.PrintConsole("Beatrice's Romance Progression: Romance progression stage set to " + stage)
         BA_BeatriceDialogue_RomanceVariablesQST.Stop()
-    ElseIf BeatriceAttraction < 1.15
+    ElseIf BeatriceAttraction < 1.0
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
         MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice requires the player character to be more attractive to resume the progression.")
         BA_BeatriceDialogue_RomanceVariablesQST.Stop()

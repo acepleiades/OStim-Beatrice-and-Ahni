@@ -101,7 +101,7 @@ function HandleUpsetScenarios(actor Ahni)
     float AhniAttraction = (BA_AhniDialogue_RomanceVariablesQST as OCR_AttractionUtil).CalculateNPCAttraction(Ahni)
     MiscUtil.PrintConsole("Ahni's Romance Progression: Ahni's calculated attraction is" + AhniAttraction)
     float AhniIntimacy = Ahni.GetFactionRank(OCR_Lover_Value_Intimacy)
-    if AhniAttraction >= 1.3 && AhniIntimacy >= 50
+    if AhniAttraction >= 1.15 && AhniIntimacy >= 50
         (BA_AhniDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
         if OCR_Commitment_PlayerIsInExclusiveRelationship.GetValue() == 0 ; Exclusive relationship check
             (BA_AhniDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
@@ -123,7 +123,7 @@ function HandleUpsetScenarios(actor Ahni)
             MiscUtil.PrintConsole("Ahni's Romance Progression: Ahni requires the player character to not be in an exclusive relationship to resume the progression.")
             BA_AhniDialogue_RomanceVariablesQST.Stop()
         endif
-    ElseIf AhniAttraction < 1.3
+    ElseIf AhniAttraction < 1.15
         BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
         MiscUtil.PrintConsole("Ahni's Romance Progression: Ahni requires the player character to be more attractive to resume the progression.")
         BA_AhniDialogue_RomanceVariablesQST.Stop()
