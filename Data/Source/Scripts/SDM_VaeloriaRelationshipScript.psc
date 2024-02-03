@@ -17,7 +17,7 @@ function Flatter(actor actor1)
 endfunction
 
 Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
-    OCR_GlobalFunctions.AdvanceTimeByHours(2, GameHour, GameDay, GameDaysPassed, GameMonth, GameYear)
+    OCR_GlobalFunctions.AdvanceTimeByHours(1, GameHour, GameDay, GameDaysPassed, GameMonth, GameYear)
     float currenttime = GameDaysPassed.getvalue()
 	float setcooldown = currenttime + 0.25 ;6 hours
 	SDM_VaeloriaDialogue_CooldownFlatter.setvalue(setcooldown)
