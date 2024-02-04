@@ -6,7 +6,7 @@ Scriptname BA_TIF__06331CFF Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-(GetOwningQuest() as BA_AhniDialogue_IntimacyIncrease).SpendTimeIntimacy()
+(GetOwningQuest() as BA_AhniDialogueGeneral).HangOut(akspeaker)
 ;END CODE
 EndFunction
 ;END FRAGMENT
