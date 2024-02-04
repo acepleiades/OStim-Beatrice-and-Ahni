@@ -2,9 +2,9 @@
 ;NEXT FRAGMENT INDEX 2
 Scriptname QF_BA_AhniDialogue_RomancePr_0761023B Extends Quest Hidden
 
-;BEGIN ALIAS PROPERTY Beatrice
+;BEGIN ALIAS PROPERTY Ahni
 ;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_Beatrice Auto
+ReferenceAlias Property Alias_Ahni Auto
 ;END ALIAS PROPERTY
 
 ;BEGIN FRAGMENT Fragment_0

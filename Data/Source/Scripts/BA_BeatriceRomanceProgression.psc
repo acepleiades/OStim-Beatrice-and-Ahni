@@ -53,7 +53,7 @@ Function ResponseUpset(actor Beatrice)
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
     BA_BeatriceDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-    Debug.Notification("Beatrice is unhappy.")
+    Debug.Notification("Beatrice dislikes your response.")
 endFunction
 
 Function BeatriceGift()

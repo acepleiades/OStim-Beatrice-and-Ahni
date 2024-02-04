@@ -5,7 +5,6 @@ Faction Property OCR_Lover_PlayerCommittedRelationshipFaction  Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
 Faction Property OCR_OStimScenes_3PPCandidateFaction  Auto
 GlobalVariable Property BA_AhniDialogue_RomanceProgression_Blockage  Auto
-GlobalVariable Property BA_AhniDialogue_RomanceProgression_GiftGiven  Auto
 GlobalVariable Property BA_AhniDialogue_RomanceProgression_HasApologized  Auto
 GlobalVariable Property BA_AhniDialogue_RomanceProgression_ProgressionPossible  Auto
 GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
@@ -53,7 +52,7 @@ Function ResponseUnhappy(actor Ahni)
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
     BA_AhniDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-    Debug.Notification("Ahni is unhappy.")
+    Debug.Notification("Ahni dislikes your response.")
 endFunction
 
 Function AhniRP40Scene(actor Ahni)
