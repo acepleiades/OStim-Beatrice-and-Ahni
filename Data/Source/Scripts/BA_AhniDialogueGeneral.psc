@@ -15,7 +15,6 @@ SPELL Property BA_Buff_AhnisJoy_Spell2  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell3  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell4  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell5  Auto
-Quest Property OCR_PrivateCellsUtilQST Auto
 
 Function HangOut(actor Ahni)
 	;(GetOwningQuest() as BA_AhniDialogueGeneral).HangOut(akspeaker)
@@ -66,9 +65,3 @@ Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
     endif
     UnregisterForModEvent("ostim_end")
 EndEvent
-
-function Camp(actor actor1)
-    ;(GetOwningQuest() as BA_AhniDialogueGeneral).Camp(akspeaker)
-    ;OCR_PrivateCellsUtilQST.FollowerCamping(actor1)
-    OCR_GlobalFunctions.AdvanceTimeByHours(1, GameHour, GameDay, GameDaysPassed, GameMonth, GameYear)
-endfunction
