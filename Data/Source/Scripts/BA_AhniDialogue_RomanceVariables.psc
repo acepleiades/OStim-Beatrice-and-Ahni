@@ -16,8 +16,10 @@ GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
 Message Property BA_AhniDialogue_RomanceProgression_Reset Auto
 Quest Property BA_AhniDialogue_RomanceProgressionQST  Auto
 Quest Property BA_AhniDialogue_RomanceVariablesQST  Auto
+ReferenceAlias Property Alias_AhniRPSandbox  Auto ;From the quest SDM_AhniRomanceProgressionQST
 
 function UpdateRomanceProgressionVariables(actor Ahni)
+    Alias_AhniRPSandbox.Clear()
     OCR_RomanceProgression_NoMoreInThisInstance.SetValue(0)
     if BA_AhniDialogue_RomanceProgression_Reset_Shown.GetValue() == 0
         if Ahni.GetFactionRank(OCR_Lover_Value_Love) > 0 || Ahni.IsInFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
@@ -46,10 +48,12 @@ function UpdateRomanceProgressionVariables(actor Ahni)
                 BA_AhniDialogue_RomanceProgressionQST.SetStage(10)
                 BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Ahni's Romance Progression: progression has just begun and stage is 10.")
+                Alias_AhniRPSandbox.ForceRefTo(Ahni)
                 BA_AhniDialogue_RomanceVariablesQST.Stop()
             ElseIf AhniIntimacy >= requiredIntimacy
                 BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Ahni's Romance Progression: progression is currently possible.")
+                Alias_AhniRPSandbox.ForceRefTo(Ahni)
                 BA_AhniDialogue_RomanceVariablesQST.Stop()
             else
                 MiscUtil.PrintConsole("Ahni's Romance Progression: progression is not possible because of low Intimacy.")
@@ -88,6 +92,7 @@ function HandleCommitmentScenarios(actor Ahni, int currentRomanceProgressionStag
             BA_AhniDialogue_RomanceProgressionQST.SetStage(50) ; Normal love confession
             BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
             MiscUtil.PrintConsole("Ahni's Romance Progression: progression stage set to 50.")
+            Alias_AhniRPSandbox.ForceRefTo(Ahni)
             BA_AhniDialogue_RomanceVariablesQST.Stop()
         endif
     Else
@@ -110,12 +115,14 @@ function HandleUpsetScenarios(actor Ahni)
                 BA_AhniDialogue_RomanceProgressionQST.SetStage(90)
                 BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Ahni's Romance Progression: progression stage set to 90.")
+                Alias_AhniRPSandbox.ForceRefTo(Ahni)
                 BA_AhniDialogue_RomanceVariablesQST.Stop()
             Else
                 BA_AhniDialogue_RomanceProgressionQST.Reset()
                 BA_AhniDialogue_RomanceProgressionQST.SetStage(70)
                 BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Ahni's Romance Progression: progression stage set to 70.")
+                Alias_AhniRPSandbox.ForceRefTo(Ahni)
                 BA_AhniDialogue_RomanceVariablesQST.Stop()
             endif
         Else
@@ -143,6 +150,7 @@ function CheckAttractionAndSetStage(actor Ahni, int stage)
         BA_AhniDialogue_RomanceProgressionQST.SetStage(stage)
         BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
         MiscUtil.PrintConsole("Ahni's Romance Progression: Romance progression stage set to " + stage)
+        Alias_AhniRPSandbox.ForceRefTo(Ahni)
         BA_AhniDialogue_RomanceVariablesQST.Stop()
     ElseIf AhniAttraction < 1.0
         BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(0)

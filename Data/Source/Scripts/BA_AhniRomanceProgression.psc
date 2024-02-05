@@ -10,6 +10,7 @@ GlobalVariable Property BA_AhniDialogue_RomanceProgression_ProgressionPossible  
 GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
 OCR_OStimScenesUtil Property Util Auto
 Quest Property BA_AhniDialogue_RomanceProgressionQST  Auto
+ReferenceAlias Property Alias_Ahni  Auto
 
 Function ResponsePositive(actor Ahni)
     ;(GetOwningQuest() as BA_AhniRomanceProgression).ResponsePositive(akspeaker)
@@ -26,6 +27,7 @@ Function ResponsePositive(actor Ahni)
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
     BA_AhniDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
+    Alias_Ahni.Clear()
 endFunction
 
 Function ResponseNeutral(actor Ahni)
@@ -43,6 +45,7 @@ Function ResponseNeutral(actor Ahni)
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
     BA_AhniDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
+    Alias_Ahni.Clear()
 endFunction
 
 Function ResponseUnhappy(actor Ahni)
@@ -53,6 +56,7 @@ Function ResponseUnhappy(actor Ahni)
     BA_AhniDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
     Debug.Notification("Ahni dislikes your response.")
+    Alias_Ahni.Clear()
 endFunction
 
 Function AhniRP40Scene(actor Ahni)
@@ -81,4 +85,5 @@ Function Apologize()
     BA_AhniDialogue_RomanceProgression_HasApologized.SetValue(1)
     BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
     Debug.Notification("Ahni accepts your apology.")
+    Alias_Ahni.Clear()
 endFunction

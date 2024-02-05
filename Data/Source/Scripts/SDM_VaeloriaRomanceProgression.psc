@@ -89,4 +89,5 @@ Function Reconcile()
     SDM_VaeloriaDialogue_RomanceProgression_HasApologized.SetValue(1)
     SDM_VaeloriaDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
     Debug.Notification("Vaeloria accepts your reconciliation.")
+    Alias_Vaeloria.Clear()
 endFunction

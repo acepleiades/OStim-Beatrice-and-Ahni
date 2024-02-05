@@ -16,8 +16,10 @@ GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
 Message Property BA_BeatriceDialogue_RomanceProgression_Reset Auto
 Quest Property BA_BeatriceDialogue_RomanceProgressionQST  Auto
 Quest Property BA_BeatriceDialogue_RomanceVariablesQST  Auto
+ReferenceAlias Property Alias_BeatriceRPSandbox  Auto ;From the quest SDM_BeatriceRomanceProgressionQST
 
 function UpdateRomanceProgressionVariables(actor Beatrice)
+    Alias_BeatriceRPSandbox.Clear()
     if BA_BeatriceDialogue_RomanceProgression_Reset_Shown.GetValue() == 0
         if Beatrice.GetFactionRank(OCR_Lover_Value_Love) > 0 || Beatrice.IsInFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
             Int iChoice = BA_BeatriceDialogue_RomanceProgression_Reset.Show()
@@ -45,10 +47,12 @@ function UpdateRomanceProgressionVariables(actor Beatrice)
                 BA_BeatriceDialogue_RomanceProgressionQST.SetStage(10)
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Beatrice's Romance Progression: progression has just begun and stage is 10.")
+                Alias_BeatriceRPSandbox.ForceRefTo(Beatrice)
                 BA_BeatriceDialogue_RomanceVariablesQST.Stop()
             ElseIf BeatriceIntimacy >= requiredIntimacy
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Beatrice's Romance Progression: progression is currently possible.")
+                Alias_BeatriceRPSandbox.ForceRefTo(Beatrice)
                 BA_BeatriceDialogue_RomanceVariablesQST.Stop()
             else
                 MiscUtil.PrintConsole("Beatrice's Romance Progression: progression is not possible because of low Intimacy.")
@@ -87,6 +91,7 @@ function HandleCommitmentScenarios(actor Beatrice, int currentRomanceProgression
             BA_BeatriceDialogue_RomanceProgressionQST.SetStage(50) ; Normal love confession
             BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
             MiscUtil.PrintConsole("Beatrice's Romance Progression: progression stage set to 50.")
+            Alias_BeatriceRPSandbox.ForceRefTo(Beatrice)
             BA_BeatriceDialogue_RomanceVariablesQST.Stop()
         endif
     Else
@@ -109,12 +114,14 @@ function HandleUpsetScenarios(actor Beatrice)
                 BA_BeatriceDialogue_RomanceProgressionQST.SetStage(90)
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Beatrice's Romance Progression: progression stage set to 90.")
+                Alias_BeatriceRPSandbox.ForceRefTo(Beatrice)
                 BA_BeatriceDialogue_RomanceVariablesQST.Stop()
             Else
                 BA_BeatriceDialogue_RomanceProgressionQST.Reset()
                 BA_BeatriceDialogue_RomanceProgressionQST.SetStage(70)
                 BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
                 MiscUtil.PrintConsole("Beatrice's Romance Progression: progression stage set to 70.")
+                Alias_BeatriceRPSandbox.ForceRefTo(Beatrice)
                 BA_BeatriceDialogue_RomanceVariablesQST.Stop()
             endif
         Else
@@ -142,6 +149,7 @@ function CheckAttractionAndSetStage(actor Beatrice, int stage)
         BA_BeatriceDialogue_RomanceProgressionQST.SetStage(stage)
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
         MiscUtil.PrintConsole("Beatrice's Romance Progression: Romance progression stage set to " + stage)
+        Alias_BeatriceRPSandbox.ForceRefTo(Beatrice)
         BA_BeatriceDialogue_RomanceVariablesQST.Stop()
     ElseIf BeatriceAttraction < 1.0
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)

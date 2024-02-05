@@ -6,7 +6,7 @@ Scriptname SDM_TIF__07726C8E Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-(GetOwningQuest() as SDM_VaeloriaRomanceProgression).ResponsePositive(akspeaker)
+(GetOwningQuest() as SDM_VaeloriaRomanceProgression).ResponseDislike(akspeaker)
 ;END CODE
 EndFunction
 ;END FRAGMENT

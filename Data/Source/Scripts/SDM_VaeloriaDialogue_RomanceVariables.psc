@@ -15,6 +15,7 @@ GlobalVariable Property SDM_VaeloriaDialogue_RomanceProgression_HasApologized  A
 GlobalVariable Property SDM_VaeloriaDialogue_RomanceProgression_ProgressionPossible  Auto
 Keyword Property Vampire  Auto
 Quest Property DA10 Auto
+Quest Property OCR_CommitmentUtilQST  Auto
 Quest Property SDM_VaeloriaDialogue_RomanceProgressionQST  Auto
 Quest Property SDM_VaeloriaDialogue_RomanceVariablesQST  Auto
 ReferenceAlias Property Alias_VaeloriaRPSandbox  Auto ;From the quest SDM_VaeloriaRomanceProgressionQST
@@ -72,11 +73,16 @@ function UpdateRomanceProgressionVariables(actor Vaeloria)
 endFunction
 
 function HandleCommitmentScenarios(actor Vaeloria, int currentRomanceProgressionStage)
-    (SDM_VaeloriaDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
+    (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
     if OCR_Commitment_PlayerIsInExclusiveRelationship.GetValue() == 0 ; Exclusive relationship check
-        (SDM_VaeloriaDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
+        (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
         if OCR_Commitment_PlayerIsInNonexclusiveRelationship.GetValue() == 1  ; Nonexclusive relationship check
-            CheckAttractionAndSetStage(Vaeloria, 80)
+            SDM_VaeloriaDialogue_RomanceProgressionQST.Reset()
+            SDM_VaeloriaDialogue_RomanceProgressionQST.SetStage(80)
+            SDM_VaeloriaDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
+            MiscUtil.PrintConsole("Vaeloria's Romance Progression: Romance progression stage set to 80.")
+            Alias_VaeloriaRPSandbox.ForceRefTo(Vaeloria)
+            SDM_VaeloriaDialogue_RomanceVariablesQST.Stop()
         Else
             SDM_VaeloriaDialogue_RomanceProgressionQST.Reset()
             SDM_VaeloriaDialogue_RomanceProgressionQST.SetStage(50) ; Normal love confession
@@ -99,9 +105,9 @@ function HandleUpsetScenarios(actor Vaeloria)
     endif
     float VaeloriaIntimacy = Vaeloria.GetFactionRank(OCR_Lover_Value_Intimacy)
     if VaeloriaIsKindred && VaeloriaIntimacy >= 50
-        (SDM_VaeloriaDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
+        (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
         if OCR_Commitment_PlayerIsInExclusiveRelationship.GetValue() == 0 ; Exclusive relationship check
-            (SDM_VaeloriaDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
+            (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
             if OCR_Commitment_PlayerIsInNonexclusiveRelationship.GetValue() == 1  ; Nonexclusive relationship check
                 SDM_VaeloriaDialogue_RomanceProgressionQST.Reset()
                 SDM_VaeloriaDialogue_RomanceProgressionQST.SetStage(90)
@@ -122,30 +128,6 @@ function HandleUpsetScenarios(actor Vaeloria)
             MiscUtil.PrintConsole("Vaeloria's Romance Progression: Vaeloria requires the player character to not be in an exclusive relationship to resume the progression.")
             SDM_VaeloriaDialogue_RomanceVariablesQST.Stop()
         endif
-    ElseIf VaeloriaIsKindred == 0
-        SDM_VaeloriaDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-        MiscUtil.PrintConsole("Vaeloria's Romance Progression: Vaeloria requires the player character to be a vampire of finish Molag Bal's quest to resume the progression.")
-        SDM_VaeloriaDialogue_RomanceVariablesQST.Stop()
-    Else
-        SDM_VaeloriaDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-        MiscUtil.PrintConsole("Vaeloria's Romance Progression: Vaeloria requires higher Intimacy to resume the progression.")
-        SDM_VaeloriaDialogue_RomanceVariablesQST.Stop()
-    endif
-endFunction
-
-function CheckAttractionAndSetStage(actor Vaeloria, int stage)
-    bool VaeloriaIsKindred
-    if PlayerRef.Haskeyword(Vampire) || DA10.IsCompleted()
-        VaeloriaIsKindred = 1
-    endif
-    float VaeloriaIntimacy = Vaeloria.GetFactionRank(OCR_Lover_Value_Intimacy)
-    if VaeloriaIsKindred && VaeloriaIntimacy >= 50
-        SDM_VaeloriaDialogue_RomanceProgressionQST.Reset()
-        SDM_VaeloriaDialogue_RomanceProgressionQST.SetStage(stage)
-        SDM_VaeloriaDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
-        MiscUtil.PrintConsole("Vaeloria's Romance Progression: Romance progression stage set to " + stage)
-        Alias_VaeloriaRPSandbox.ForceRefTo(Vaeloria)
-        SDM_VaeloriaDialogue_RomanceVariablesQST.Stop()
     ElseIf VaeloriaIsKindred == 0
         SDM_VaeloriaDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
         MiscUtil.PrintConsole("Vaeloria's Romance Progression: Vaeloria requires the player character to be a vampire of finish Molag Bal's quest to resume the progression.")

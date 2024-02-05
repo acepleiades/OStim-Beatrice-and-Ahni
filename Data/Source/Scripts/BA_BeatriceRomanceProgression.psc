@@ -11,6 +11,7 @@ GlobalVariable Property BA_BeatriceDialogue_RomanceProgression_ProgressionPossib
 GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
 ObjectReference Property Gift Auto
 Quest Property BA_BeatriceDialogue_RomanceProgressionQST  Auto
+ReferenceAlias Property Alias_Beatrice  Auto
 
 Function ResponsePositive(actor Beatrice)
     ;(GetOwningQuest() as BA_BeatriceRomanceProgression).ResponsePositive(akspeaker)
@@ -27,6 +28,7 @@ Function ResponsePositive(actor Beatrice)
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
     BA_BeatriceDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
+    Alias_Beatrice.Clear()
 endFunction
 
 Function ResponseNeutral(actor Beatrice)
@@ -44,6 +46,7 @@ Function ResponseNeutral(actor Beatrice)
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
     BA_BeatriceDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
+    Alias_Beatrice.Clear()
 endFunction
 
 Function ResponseUpset(actor Beatrice)
@@ -54,6 +57,7 @@ Function ResponseUpset(actor Beatrice)
     BA_BeatriceDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
     Debug.Notification("Beatrice dislikes your response.")
+    Alias_Beatrice.Clear()
 endFunction
 
 Function BeatriceGift()
@@ -83,6 +87,7 @@ Function Apologize()
     BA_BeatriceDialogue_RomanceProgression_HasApologized.SetValue(1)
     BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
     Debug.Notification("Beatrice accepts your apology.")
+    Alias_Beatrice.Clear()
 endFunction
 
 function AcceptMultiplePartners(actor actor1)
