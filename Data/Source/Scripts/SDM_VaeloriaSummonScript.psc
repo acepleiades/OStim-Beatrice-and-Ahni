@@ -70,3 +70,10 @@ function Inventory()
     ;(GetOwningQuest() as SDM_VaeloriaSummonScript).Inventory()
     SDM_VaeloriaInventory.Activate(PlayerREF)
 endfunction
+
+;Notifications for the feature being restricted
+
+Function DismissRestricted()
+    ;(GetOwningQuest() as SDM_VaeloriaSummonScript).DismissRestricted()
+    Debug.Notification("You cannot dismiss Vaeloria in this location.")
+endfunction

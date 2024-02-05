@@ -15,12 +15,12 @@ Function ResponsePositive(actor Vaeloria)
     ;(GetOwningQuest() as SDM_VaeloriaRomanceProgression).ResponsePositive(akspeaker)
     int VaeloriaIntimacy = Vaeloria.GetFactionRank(OCR_Lover_Value_Intimacy)
     if VaeloriaIntimacy < 100
-        int newIntimacy = VaeloriaIntimacy + 4
+        int newIntimacy = VaeloriaIntimacy + 8
         if newIntimacy > 100
             newIntimacy = 100
         endif
         Vaeloria.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
-        Debug.Notification("Intimacy with Vaeloria has increased.")
+        Debug.Notification("Intimacy with Vaeloria has greatly increased.")
     endif
     int currentRomanceProgressionStage = SDM_VaeloriaDialogue_RomanceProgressionQST.GetStage()
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
@@ -33,12 +33,12 @@ Function ResponseNeutral(actor Vaeloria)
     ;(GetOwningQuest() as SDM_VaeloriaRomanceProgression).ResponseNeutral(akspeaker)
     int VaeloriaIntimacy = Vaeloria.GetFactionRank(OCR_Lover_Value_Intimacy)
     if VaeloriaIntimacy < 100
-        int newIntimacy = VaeloriaIntimacy + 2
+        int newIntimacy = VaeloriaIntimacy + 4
         if newIntimacy > 100
             newIntimacy = 100
         endif
         Vaeloria.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
-        Debug.Notification("Intimacy with Vaeloria has slightly increased.")
+        Debug.Notification("Intimacy with Vaeloria has increased.")
     endif
     int currentRomanceProgressionStage = SDM_VaeloriaDialogue_RomanceProgressionQST.GetStage()
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
