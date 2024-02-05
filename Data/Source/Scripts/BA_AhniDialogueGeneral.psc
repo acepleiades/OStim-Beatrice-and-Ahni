@@ -15,18 +15,19 @@ SPELL Property BA_Buff_AhnisJoy_Spell2  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell3  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell4  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell5  Auto
+Quest Property OCR_PrivateCellsUtilQST Auto
 
 Function HangOut(actor Ahni)
-	;(GetOwningQuest() as BA_AhniDialogueGeneral).HangOut(akspeaker)
+    ;(GetOwningQuest() as BA_AhniDialogueGeneral).HangOut(akspeaker)
     RegisterForModEvent("ostim_end", "OStimEnd")
     Util.ChatterNPC(Ahni)
 EndFunction
 
 Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
     OCR_GlobalFunctions.AdvanceTimeByHours(2, GameHour, GameDay, GameDaysPassed, GameMonth, GameYear)
-	float currenttime = GameDaysPassed.getvalue()
-	float setcooldown = currenttime + 0.25 ;6 hours
-	BA_CooldownToSet_AhniTalkRandom.setvalue(setcooldown)
+    float currenttime = GameDaysPassed.getvalue()
+    float setcooldown = currenttime + 0.25 ;6 hours
+    BA_CooldownToSet_AhniTalkRandom.setvalue(setcooldown)
     int currentrank = Ahni.GetFactionRank(OCR_Lover_Value_Intimacy)
     if currentrank < 100
         int newrank = currentrank + 2
@@ -65,3 +66,9 @@ Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
     endif
     UnregisterForModEvent("ostim_end")
 EndEvent
+
+function Camp(actor actor1)
+    ;(GetOwningQuest() as BA_AhniDialogueGeneral).Camp(akspeaker)
+    (OCR_PrivateCellsUtilQST as OCR_PrivateCellsUtil).FollowerCamping(actor1)
+    OCR_GlobalFunctions.AdvanceTimeByHours(1, GameHour, GameDay, GameDaysPassed, GameMonth, GameYear)
+endfunction
