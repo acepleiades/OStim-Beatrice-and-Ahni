@@ -61,18 +61,14 @@ function UpdateRomanceProgressionVariables(actor Vaeloria)
         endif
     else ; Love confession stages
         if SDM_VaeloriaDialogue_RomanceProgression_Blockage.GetValue() == 1 && SDM_VaeloriaDialogue_RomanceProgression_HasApologized.GetValue() == 1
-            ;Ensure that romance progression is at upset stage
-            currentRomanceProgressionStage = 70
-        endif
-        if currentRomanceProgressionStage != 70 ; Romance subject is not upset
-            HandleCommitmentScenarios(Vaeloria, currentRomanceProgressionStage)
-        else ; Romance subject is upset
             HandleUpsetScenarios(Vaeloria)
+        else
+            HandleCommitmentScenarios(Vaeloria)
         endif
     endif
 endFunction
 
-function HandleCommitmentScenarios(actor Vaeloria, int currentRomanceProgressionStage)
+function HandleCommitmentScenarios(actor Vaeloria)
     (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
     if OCR_Commitment_PlayerIsInExclusiveRelationship.GetValue() == 0 ; Exclusive relationship check
         (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()

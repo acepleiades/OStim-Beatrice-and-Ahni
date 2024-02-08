@@ -16,6 +16,8 @@ GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
 Message Property BA_BeatriceDialogue_RomanceProgression_Reset Auto
 Quest Property BA_BeatriceDialogue_RomanceProgressionQST  Auto
 Quest Property BA_BeatriceDialogue_RomanceVariablesQST  Auto
+Quest Property OCR_AttractionUtilQST  Auto
+Quest Property OCR_CommitmentUtilQST  Auto
 ReferenceAlias Property Alias_BeatriceRPSandbox  Auto ;From the quest SDM_BeatriceRomanceProgressionQST
 
 function UpdateRomanceProgressionVariables(actor Beatrice)
@@ -70,22 +72,19 @@ function UpdateRomanceProgressionVariables(actor Beatrice)
     else ; Love confession stages
         if BA_BeatriceDialogue_RomanceProgression_Blockage.GetValue() == 1 && BA_BeatriceDialogue_RomanceProgression_HasApologized.GetValue() == 1
             ;Ensure that romance progression is at upset stage
-            currentRomanceProgressionStage = 70
-        endif
-        if currentRomanceProgressionStage != 70 ; Romance subject is not upset
-            HandleCommitmentScenarios(Beatrice, currentRomanceProgressionStage)
-        else ; Romance subject is upset
             HandleUpsetScenarios(Beatrice)
+        else
+            HandleCommitmentScenarios(Beatrice)
         endif
     endif
 endFunction
 
-function HandleCommitmentScenarios(actor Beatrice, int currentRomanceProgressionStage)
-    (BA_BeatriceDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
+function HandleCommitmentScenarios(actor Beatrice)
+    (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
     if OCR_Commitment_PlayerIsInExclusiveRelationship.GetValue() == 0 ; Exclusive relationship check
-        (BA_BeatriceDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
+        (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
         if OCR_Commitment_PlayerIsInNonexclusiveRelationship.GetValue() == 1  ; Nonexclusive relationship check
-            CheckAttractionAndSetStage(Beatrice, 80)
+            CheckAttractionAndSetStage(Beatrice)
         Else
             BA_BeatriceDialogue_RomanceProgressionQST.Reset()
             BA_BeatriceDialogue_RomanceProgressionQST.SetStage(50) ; Normal love confession
@@ -102,13 +101,13 @@ function HandleCommitmentScenarios(actor Beatrice, int currentRomanceProgression
 endFunction
 
 function HandleUpsetScenarios(actor Beatrice)
-    float BeatriceAttraction = (BA_BeatriceDialogue_RomanceVariablesQST as OCR_AttractionUtil).CalculateNPCAttraction(Beatrice)
+    float BeatriceAttraction = (OCR_AttractionUtilQST as OCR_AttractionUtil).CalculateNPCAttraction(Beatrice)
     MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice's calculated attraction is" + BeatriceAttraction)
     float BeatriceIntimacy = Beatrice.GetFactionRank(OCR_Lover_Value_Intimacy)
     if BeatriceAttraction >= 1.15 && BeatriceIntimacy >= 50
-        (BA_BeatriceDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
+        (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
         if OCR_Commitment_PlayerIsInExclusiveRelationship.GetValue() == 0 ; Exclusive relationship check
-            (BA_BeatriceDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
+            (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
             if OCR_Commitment_PlayerIsInNonexclusiveRelationship.GetValue() == 1  ; Nonexclusive relationship check
                 BA_BeatriceDialogue_RomanceProgressionQST.Reset()
                 BA_BeatriceDialogue_RomanceProgressionQST.SetStage(90)
@@ -140,15 +139,15 @@ function HandleUpsetScenarios(actor Beatrice)
     endif
 endFunction
 
-function CheckAttractionAndSetStage(actor Beatrice, int stage)
-    float BeatriceAttraction = (BA_BeatriceDialogue_RomanceVariablesQST as OCR_AttractionUtil).CalculateNPCAttraction(Beatrice)
+function CheckAttractionAndSetStage(actor Beatrice)
+    float BeatriceAttraction = (OCR_AttractionUtilQST as OCR_AttractionUtil).CalculateNPCAttraction(Beatrice)
     MiscUtil.PrintConsole("Beatrice's Romance Progression: Beatrice's calculated attraction is " + BeatriceAttraction)
     float BeatriceIntimacy = Beatrice.GetFactionRank(OCR_Lover_Value_Intimacy)
     if BeatriceAttraction >= 1.0 && BeatriceIntimacy >= 50
         BA_BeatriceDialogue_RomanceProgressionQST.Reset()
-        BA_BeatriceDialogue_RomanceProgressionQST.SetStage(stage)
+        BA_BeatriceDialogue_RomanceProgressionQST.SetStage(80)
         BA_BeatriceDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
-        MiscUtil.PrintConsole("Beatrice's Romance Progression: Romance progression stage set to " + stage)
+        MiscUtil.PrintConsole("Beatrice's Romance Progression: Romance progression stage set to 80")
         Alias_BeatriceRPSandbox.ForceRefTo(Beatrice)
         BA_BeatriceDialogue_RomanceVariablesQST.Stop()
     ElseIf BeatriceAttraction < 1.0

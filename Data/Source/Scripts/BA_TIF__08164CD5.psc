@@ -6,7 +6,7 @@ Scriptname BA_TIF__08164CD5 Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-akspeaker.OpenInventory()
+(GetOwningQuest() as BA_AhniDialogueGeneral).Inventory()
 ;END CODE
 EndFunction
 ;END FRAGMENT

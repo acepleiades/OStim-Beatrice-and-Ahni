@@ -8,8 +8,8 @@ GlobalVariable Property BA_AhniDialogue_RomanceProgression_Blockage  Auto
 GlobalVariable Property BA_AhniDialogue_RomanceProgression_HasApologized  Auto
 GlobalVariable Property BA_AhniDialogue_RomanceProgression_ProgressionPossible  Auto
 GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
-OCR_OStimScenesUtil Property Util Auto
 Quest Property BA_AhniDialogue_RomanceProgressionQST  Auto
+Quest Property OCR_OStimScenesUtilQST  Auto
 ReferenceAlias Property Alias_Ahni  Auto
 
 Function ResponsePositive(actor Ahni)
@@ -61,7 +61,7 @@ endFunction
 
 Function AhniRP40Scene(actor Ahni)
     ;(GetOwningQuest() as BA_AhniRomanceProgression).AhniRP40Scene(akspeaker)
-    Util.OCR_StartScene2P(Ahni)
+    (OCR_OStimScenesUtilQST as OCR_OStimScenesUtil).OCR_StartScene2P(Ahni)
 endfunction
 
 Function ConfessionAccept(actor actor1)

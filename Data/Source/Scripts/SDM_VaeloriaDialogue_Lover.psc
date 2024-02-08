@@ -3,7 +3,6 @@ Scriptname SDM_VaeloriaDialogue_Lover extends Quest
 Quest Property OCR_OStimScenesUtilQST Auto
 Quest Property OCR_OStimSequencesUtilQST Auto
 Quest Property OCR_PrivateCellsUtilQST Auto
-Quest Property SDM_VaeloriaDialogue_LoverQST Auto
 
 Function Flirt(actor actor1)
     ;(GetOwningQuest() as SDM_VaeloriaDialogue_Lover).Flirt(akspeaker)

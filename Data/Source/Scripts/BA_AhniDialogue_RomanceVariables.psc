@@ -16,6 +16,8 @@ GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
 Message Property BA_AhniDialogue_RomanceProgression_Reset Auto
 Quest Property BA_AhniDialogue_RomanceProgressionQST  Auto
 Quest Property BA_AhniDialogue_RomanceVariablesQST  Auto
+Quest Property OCR_AttractionUtilQST  Auto
+Quest Property OCR_CommitmentUtilQST  Auto
 ReferenceAlias Property Alias_AhniRPSandbox  Auto ;From the quest SDM_AhniRomanceProgressionQST
 
 function UpdateRomanceProgressionVariables(actor Ahni)
@@ -71,22 +73,20 @@ function UpdateRomanceProgressionVariables(actor Ahni)
     else ; Love confession stages
         if BA_AhniDialogue_RomanceProgression_Blockage.GetValue() == 1 && BA_AhniDialogue_RomanceProgression_HasApologized.GetValue() == 1
             ;Ensure that romance progression is at upset stage
-            currentRomanceProgressionStage = 70
-        endif
-        if currentRomanceProgressionStage != 70 ; Romance subject is not upset
-            HandleCommitmentScenarios(Ahni, currentRomanceProgressionStage)
-        else ; Romance subject is upset
             HandleUpsetScenarios(Ahni)
+        else
+            HandleCommitmentScenarios(Ahni)
         endif
     endif
+
 endFunction
 
-function HandleCommitmentScenarios(actor Ahni, int currentRomanceProgressionStage)
-    (BA_AhniDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
+function HandleCommitmentScenarios(actor Ahni)
+    (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
     if OCR_Commitment_PlayerIsInExclusiveRelationship.GetValue() == 0 ; Exclusive relationship check
-        (BA_AhniDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
+        (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
         if OCR_Commitment_PlayerIsInNonexclusiveRelationship.GetValue() == 1  ; Nonexclusive relationship check
-            CheckAttractionAndSetStage(Ahni, 80)
+            CheckAttractionAndSetStage(Ahni)
         Else
             BA_AhniDialogue_RomanceProgressionQST.Reset()
             BA_AhniDialogue_RomanceProgressionQST.SetStage(50) ; Normal love confession
@@ -103,13 +103,13 @@ function HandleCommitmentScenarios(actor Ahni, int currentRomanceProgressionStag
 endFunction
 
 function HandleUpsetScenarios(actor Ahni)
-    float AhniAttraction = (BA_AhniDialogue_RomanceVariablesQST as OCR_AttractionUtil).CalculateNPCAttraction(Ahni)
+    float AhniAttraction = (OCR_AttractionUtilQST as OCR_AttractionUtil).CalculateNPCAttraction(Ahni)
     MiscUtil.PrintConsole("Ahni's Romance Progression: Ahni's calculated attraction is" + AhniAttraction)
     float AhniIntimacy = Ahni.GetFactionRank(OCR_Lover_Value_Intimacy)
     if AhniAttraction >= 1.15 && AhniIntimacy >= 50
-        (BA_AhniDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
+        (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInExclusiveRelationship()
         if OCR_Commitment_PlayerIsInExclusiveRelationship.GetValue() == 0 ; Exclusive relationship check
-            (BA_AhniDialogue_RomanceVariablesQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
+            (OCR_CommitmentUtilQST as OCR_CommitmentUtil).UpdateGlobalVariable_PlayerIsInNonexclusiveRelationship()
             if OCR_Commitment_PlayerIsInNonexclusiveRelationship.GetValue() == 1  ; Nonexclusive relationship check
                 BA_AhniDialogue_RomanceProgressionQST.Reset()
                 BA_AhniDialogue_RomanceProgressionQST.SetStage(90)
@@ -141,15 +141,15 @@ function HandleUpsetScenarios(actor Ahni)
     endif
 endFunction
 
-function CheckAttractionAndSetStage(actor Ahni, int stage)
-    float AhniAttraction = (BA_AhniDialogue_RomanceVariablesQST as OCR_AttractionUtil).CalculateNPCAttraction(Ahni)
+function CheckAttractionAndSetStage(actor Ahni)
+    float AhniAttraction = (OCR_AttractionUtilQST as OCR_AttractionUtil).CalculateNPCAttraction(Ahni)
     MiscUtil.PrintConsole("Ahni's Romance Progression: Ahni's calculated attraction is " + AhniAttraction)
     float AhniIntimacy = Ahni.GetFactionRank(OCR_Lover_Value_Intimacy)
     if AhniAttraction >= 1.0 && AhniIntimacy >= 50
         BA_AhniDialogue_RomanceProgressionQST.Reset()
-        BA_AhniDialogue_RomanceProgressionQST.SetStage(stage)
+        BA_AhniDialogue_RomanceProgressionQST.SetStage(80)
         BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(1)
-        MiscUtil.PrintConsole("Ahni's Romance Progression: Romance progression stage set to " + stage)
+        MiscUtil.PrintConsole("Ahni's Romance Progression: Romance progression stage set to 80.")
         Alias_AhniRPSandbox.ForceRefTo(Ahni)
         BA_AhniDialogue_RomanceVariablesQST.Stop()
     ElseIf AhniAttraction < 1.0

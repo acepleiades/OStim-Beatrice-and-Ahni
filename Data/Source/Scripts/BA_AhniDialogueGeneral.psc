@@ -9,21 +9,29 @@ GlobalVariable property GameDay auto
 GlobalVariable property GameHour auto
 GlobalVariable property GameMonth auto
 GlobalVariable property GameYear auto
-OCR_OStimSequencesUtil Property Util Auto
+ObjectReference Property BA_BeatriceAhniInventory  Auto
+ObjectReference Property BA_XMarkerReset  Auto
+Quest Property OCR_OStimSequencesUtilQST  Auto
+Quest Property OCR_PrivateCellsUtilQST  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell1  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell2  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell3  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell4  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell5  Auto
-Quest Property OCR_PrivateCellsUtilQST Auto
 
 Function HangOut(actor Ahni)
     ;(GetOwningQuest() as BA_AhniDialogueGeneral).HangOut(akspeaker)
     RegisterForModEvent("ostim_end", "OStimEnd")
-    Util.ChatterNPC(Ahni)
+    (OCR_OStimSequencesUtilQST as OCR_OStimSequencesUtil).ChatterNPC(Ahni)
 EndFunction
 
 Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
+    ;Reset actor
+    BA_XMarkerReset.MoveTo(Ahni)
+    Ahni.Reset()
+    Ahni.MoveTo(BA_XMarkerReset)
+    BA_XMarkerReset.Reset()
+    ;Everything else
     OCR_GlobalFunctions.AdvanceTimeByHours(2, GameHour, GameDay, GameDaysPassed, GameMonth, GameYear)
     float currenttime = GameDaysPassed.getvalue()
     float setcooldown = currenttime + 0.25 ;6 hours
@@ -71,4 +79,9 @@ function Camp(actor actor1)
     ;(GetOwningQuest() as BA_AhniDialogueGeneral).Camp(akspeaker)
     (OCR_PrivateCellsUtilQST as OCR_PrivateCellsUtil).FollowerCamping(actor1)
     OCR_GlobalFunctions.AdvanceTimeByHours(1, GameHour, GameDay, GameDaysPassed, GameMonth, GameYear)
+endfunction
+
+function Inventory()
+    ;(GetOwningQuest() as BA_AhniDialogueGeneral).Inventory()
+    BA_BeatriceAhniInventory.Activate(PlayerREF)
 endfunction
