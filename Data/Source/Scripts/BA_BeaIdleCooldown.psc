@@ -3,7 +3,7 @@ Scriptname BA_BeaIdleCooldown extends Quest
 GlobalVariable Property GameDaysPassed  Auto
 GlobalVariable Property BA_Cooldown_IdleDialogue  Auto
 GlobalVariable Property BA_CooldownToSet_BeaIdle  Auto
-Actor Property myActor Auto
+Actor Property Beatrice Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
 
 Function SetIdleCooldown()
@@ -13,22 +13,26 @@ Function SetIdleCooldown()
 EndFunction
 
 Function IncreaseIntimacy()
-    int currentrank = myActor.GetFactionRank(OCR_Lover_Value_Intimacy)
-    if currentrank < 100
-        int newrank = currentrank + 2
-        myActor.SetFactionRank(OCR_Lover_Value_Intimacy, newrank)
-        MiscUtil.PrintConsole("Beatrice's Intimacy value was " + currentrank + " and is now " + newrank)
+    int Intimacy = Beatrice.GetFactionRank(OCR_Lover_Value_Intimacy)
+    if Intimacy < 100
+        int newIntimacy = Intimacy + 1
+        Beatrice.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
+        MiscUtil.PrintConsole("Beatrice's Intimacy value was " + Intimacy + " and is now " + newIntimacy)
         debug.notification("Intimacy with Beatrice has increased.")
-        if currentrank < 10 && newrank >= 10
+        if Intimacy < 10 && newIntimacy >= 10
             debug.notification("You may progress your relationship with Beatrice at a private location.")
-        elseif currentrank < 20 && newrank >= 20
+        elseif Intimacy < 20 && newIntimacy >= 20
             debug.notification("You may progress your relationship with Beatrice at a private location.")
-        elseif currentrank < 30 && newrank >= 30
+        elseif Intimacy < 30 && newIntimacy >= 30
             debug.notification("You may progress your relationship with Beatrice at a private location.")
-        elseif currentrank < 40 && newrank >= 40
+        elseif Intimacy < 40 && newIntimacy >= 40
             debug.notification("You may progress your relationship with Beatrice at a private location.")
-        elseif currentrank < 50 && newrank >= 50
+        elseif Intimacy < 50 && newIntimacy >= 50
             debug.notification("You may progress your relationship with Beatrice at a private location.")
         endif
+    endif
+    ;Ensure maximum intimacy is 100
+    if Intimacy > 100
+        Beatrice.SetFactionRank(OCR_Lover_Value_Intimacy, 100)
     endif
 EndFunction

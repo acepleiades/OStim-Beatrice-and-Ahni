@@ -26,41 +26,49 @@ Function HangOut(actor Ahni)
 EndFunction
 
 Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
+    UnregisterForModEvent("ostim_end")
+    ;Initialize Intimacy
+    int Intimacy = Ahni.GetFactionRank(OCR_Lover_Value_Intimacy)
     ;Reset actor
     BA_XMarkerReset.MoveTo(Ahni)
     Ahni.Reset()
     Ahni.MoveTo(BA_XMarkerReset)
     BA_XMarkerReset.Reset()
-    ;Everything else
+    ;Time skip and cooldown
     OCR_GlobalFunctions.AdvanceTimeByHours(2, GameHour, GameDay, GameDaysPassed, GameMonth, GameYear)
     float currenttime = GameDaysPassed.getvalue()
     float setcooldown = currenttime + 0.25 ;6 hours
     BA_CooldownToSet_AhniTalkRandom.setvalue(setcooldown)
-    int currentrank = Ahni.GetFactionRank(OCR_Lover_Value_Intimacy)
-    if currentrank < 100
-        int newrank = currentrank + 2
-        Ahni.SetFactionRank(OCR_Lover_Value_Intimacy, newrank)
-        MiscUtil.PrintConsole("Ahni's Intimacy value was " + currentrank + " and is now " + newrank)
+    ;Intimacy increase
+    if Intimacy < 100
+        int newIntimacy = Intimacy + 2
+        Ahni.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
+        MiscUtil.PrintConsole("Ahni's Intimacy value was " + Intimacy + " and is now " + newIntimacy)
         debug.notification("Intimacy with Ahni has increased.")
-        if currentrank < 10 && newrank >= 10
+        if Intimacy < 10 && newIntimacy >= 10
             debug.notification("You may progress your relationship with Ahni at a private location.")
-        elseif currentrank < 20 && newrank >= 20
+        elseif Intimacy < 20 && newIntimacy >= 20
             debug.notification("You may progress your relationship with Ahni at a private location.")
-        elseif currentrank < 30 && newrank >= 30
+        elseif Intimacy < 30 && newIntimacy >= 30
             debug.notification("You may progress your relationship with Ahni at a private location.")
-        elseif currentrank < 40 && newrank >= 40
+        elseif Intimacy < 40 && newIntimacy >= 40
             debug.notification("You may progress your relationship with Ahni at a private location.")
-        elseif currentrank < 50 && newrank >= 50
+        elseif Intimacy < 50 && newIntimacy >= 50
             debug.notification("You may progress your relationship with Ahni at a private location.")
         endif
     endif
+    ;Ensure maximum intimacy is 100
+    if Intimacy > 100
+        Ahni.SetFactionRank(OCR_Lover_Value_Intimacy, 100)
+    endif
+    ;Apply buff
     Debug.Notification("Spending time with Ahni was enjoyable.")
-    int Intimacy = Ahni.GetFactionRank(OCR_Lover_Value_Intimacy)
     playerref.DispelSpell(BA_Buff_AhnisJoy_Spell1)
     playerref.DispelSpell(BA_Buff_AhnisJoy_Spell2)
     playerref.DispelSpell(BA_Buff_AhnisJoy_Spell3)
     playerref.DispelSpell(BA_Buff_AhnisJoy_Spell4)
     playerref.DispelSpell(BA_Buff_AhnisJoy_Spell5)
+    Utility.Wait(0.1)
     if Intimacy < 20
         BA_Buff_AhnisJoy_Spell1.cast(playerRef, playerRef)
     elseif Intimacy < 40
@@ -72,7 +80,6 @@ Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
     else ; This covers Intimacy > 80
         BA_Buff_AhnisJoy_Spell5.cast(playerRef, playerRef)
     endif
-    UnregisterForModEvent("ostim_end")
 EndEvent
 
 function Camp(actor actor1)
