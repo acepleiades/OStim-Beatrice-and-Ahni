@@ -6,16 +6,9 @@ Scriptname BA_TIF__08164CBC Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-BeatriceXMarker.MoveTo(BA_Beatrice)
-BeatriceWaitAlias.ForceRefTo(BA_Beatrice)
-AhniWaitAlias.ForceRefTo(akspeaker)
+(GetOwningQuest() as BA_AhniDialogue_FollowerScript).Wait(akspeaker)
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
 ;END FRAGMENT CODE - Do not edit anything between this and the begin comment
-
-ObjectReference Property BeatriceXMarker  Auto  
-ReferenceAlias Property BeatriceWaitAlias Auto
-Actor Property BA_Beatrice Auto
-ReferenceAlias Property AhniWaitAlias Auto

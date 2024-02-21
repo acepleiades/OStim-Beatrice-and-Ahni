@@ -6,23 +6,9 @@ Scriptname BA_TIF__08164CE4 Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-BA_Beatrice.SetPlayerTeammate(false)
-akspeaker.SetPlayerTeammate(false)
-BA_Beatrice.SetFactionRank(CurrentFollowerFaction, 0)
-akspeaker.SetFactionRank(CurrentFollowerFaction, 0)
-BeatriceFollowerAlias.Clear()
-AhniFollowerAlias.Clear()
-PlayerFollowerCount.SetValue(0)
-BA_IsFollowing.SetValue(0)
+(GetOwningQuest() as BA_AhniDialogue_FollowerScript).Dismiss(akspeaker)
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
 ;END FRAGMENT CODE - Do not edit anything between this and the begin comment
-
-Actor Property BA_Beatrice Auto
-ReferenceAlias Property BeatriceFollowerAlias Auto
-ReferenceAlias Property AhniFollowerAlias Auto
-GlobalVariable Property PlayerFollowerCount Auto
-Faction Property CurrentFollowerFaction  Auto  
-GlobalVariable Property BA_IsFollowing Auto
