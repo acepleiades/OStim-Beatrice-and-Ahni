@@ -3,6 +3,7 @@ Scriptname BA_AhniDialogueGeneral extends Quest
 Actor Property Ahni Auto
 Actor Property playerRef Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
+GlobalVariable Property BA_CooldownToSet_AhniObserveCombat  Auto
 GlobalVariable Property BA_CooldownToSet_AhniTalkRandom  Auto
 GlobalVariable Property GameDaysPassed  Auto
 GlobalVariable property GameDay auto
@@ -91,4 +92,11 @@ endfunction
 function Inventory()
     ;(GetOwningQuest() as BA_AhniDialogueGeneral).Inventory()
     BA_BeatriceAhniInventory.Activate(PlayerREF)
+endfunction
+
+function ObserveCombatCooldown()
+    ;(GetOwningQuest() as BA_AhniDialogueGeneral).ObserveCombatCooldown()
+    float currenttime = GameDaysPassed.getvalue()
+    float setcooldown = currenttime + 0.01
+    BA_CooldownToSet_AhniObserveCombat.setvalue(setcooldown)
 endfunction

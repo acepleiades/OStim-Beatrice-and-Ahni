@@ -4,6 +4,7 @@ Actor Property Beatrice Auto
 Actor Property playerRef Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
 GlobalVariable Property BA_CooldownToSet_BeaTalkRandom  Auto
+GlobalVariable Property BA_CooldownToSet_BeaObserveCombat  Auto
 GlobalVariable property GameDay auto
 GlobalVariable property GameDaysPassed auto
 GlobalVariable property GameHour auto
@@ -91,4 +92,11 @@ endfunction
 function Inventory()
     ;(GetOwningQuest() as BA_BeatriceDialogueGeneral).Inventory()
     BA_BeatriceAhniInventory.Activate(PlayerREF)
+endfunction
+
+function ObserveCombatCooldown()
+    ;(GetOwningQuest() as BA_BeatriceDialogueGeneral).ObserveCombatCooldown()
+    float currenttime = GameDaysPassed.getvalue()
+    float setcooldown = currenttime + 0.01
+    BA_CooldownToSet_BeaObserveCombat.setvalue(setcooldown)
 endfunction
