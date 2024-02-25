@@ -83,17 +83,6 @@ Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
     endif
 EndEvent
 
-function Camp(actor actor1)
-    ;(GetOwningQuest() as BA_AhniDialogueGeneral).Camp(akspeaker)
-    (OCR_PrivateCellsUtilQST as OCR_PrivateCellsUtil).FollowerCamping(actor1)
-    OCR_GlobalFunctions.AdvanceTimeByHours(1, GameHour, GameDay, GameDaysPassed, GameMonth, GameYear)
-endfunction
-
-function Inventory()
-    ;(GetOwningQuest() as BA_AhniDialogueGeneral).Inventory()
-    BA_BeatriceAhniInventory.Activate(PlayerREF)
-endfunction
-
 function ObserveCombatCooldown()
     ;(GetOwningQuest() as BA_AhniDialogueGeneral).ObserveCombatCooldown()
     float currenttime = GameDaysPassed.getvalue()
