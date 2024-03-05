@@ -112,9 +112,9 @@ endfunction
 
 function Wait(actor actor1)
     ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).Wait(akspeaker)
-    BeatriceXMarker.MoveTo(Beatrice)
-    BeatriceWaitAlias.ForceRefTo(Beatrice)
-    AhniWaitAlias.ForceRefTo(actor1)
+    BeatriceXMarker.MoveTo(actor1)
+    BeatriceWaitAlias.ForceRefTo(actor1)
+    AhniWaitAlias.ForceRefTo(Ahni)
     BA_IsWaiting.SetValue(1)
 endfunction
 
