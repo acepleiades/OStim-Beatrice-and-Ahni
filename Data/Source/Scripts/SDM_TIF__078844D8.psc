@@ -6,7 +6,7 @@ Scriptname SDM_TIF__078844D8 Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).WaitRestricted()
+(GetOwningQuest() as SDM_AdrietteDialogue_FollowerScript).WaitRestricted()
 ;END CODE
 EndFunction
 ;END FRAGMENT
