@@ -3,11 +3,9 @@ Scriptname BA_BeatriceDialogue_FollowerScript extends Quest
 Actor Property Ahni Auto
 Actor Property Beatrice Auto
 Actor Property playerRef Auto
-Faction Property CurrentFollowerFaction  Auto
 GlobalVariable Property BA_IsFollowing Auto
 GlobalVariable Property BA_IsWaiting Auto
 GlobalVariable Property GameDaysPassed  Auto
-GlobalVariable Property PlayerFollowerCount Auto
 GlobalVariable property GameDay auto
 GlobalVariable property GameHour auto
 GlobalVariable property GameMonth auto
@@ -39,13 +37,10 @@ function Dismiss(actor actor1)
     ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).Dismiss(akspeaker)
     actor1.SetPlayerTeammate(false)
     Ahni.SetPlayerTeammate(false)
-    actor1.SetFactionRank(CurrentFollowerFaction, 0)
-    Ahni.SetFactionRank(CurrentFollowerFaction, 0)
     BeatriceFollowerAlias.Clear()
     AhniFollowerAlias.Clear()
     BeatriceWaitAlias.Clear()
     AhniWaitAlias.Clear()
-    PlayerFollowerCount.SetValue(0)
     BA_IsFollowing.SetValue(0)
     BA_IsWaiting.SetValue(0)
 endfunction
@@ -102,11 +97,8 @@ function SetFollower(actor actor1)
     ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).SetFollower(akspeaker)
     actor1.SetPlayerTeammate()
     Ahni.SetPlayerTeammate()
-    actor1.SetFactionRank(CurrentFollowerFaction, 1)
-    Ahni.SetFactionRank(CurrentFollowerFaction, 1)
     BeatriceFollowerAlias.ForceRefTo(Beatrice)
     AhniFollowerAlias.ForceRefTo(Ahni)
-    PlayerFollowerCount.SetValue(1)
     BA_IsFollowing.SetValue(1)
 endfunction
 
