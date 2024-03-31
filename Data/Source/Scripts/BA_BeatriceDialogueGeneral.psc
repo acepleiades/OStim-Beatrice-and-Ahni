@@ -3,8 +3,9 @@ Scriptname BA_BeatriceDialogueGeneral extends Quest
 Actor Property Beatrice Auto
 Actor Property playerRef Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
-GlobalVariable Property BA_CooldownToSet_BeaTalkRandom  Auto
+GlobalVariable Property BA_CooldownToSet_BeaDetectCorpse  Auto
 GlobalVariable Property BA_CooldownToSet_BeaObserveCombat  Auto
+GlobalVariable Property BA_CooldownToSet_BeaTalkRandom  Auto
 GlobalVariable property GameDay auto
 GlobalVariable property GameDaysPassed auto
 GlobalVariable property GameHour auto
@@ -88,4 +89,11 @@ function ObserveCombatCooldown()
     float currenttime = GameDaysPassed.getvalue()
     float setcooldown = currenttime + 0.01
     BA_CooldownToSet_BeaObserveCombat.setvalue(setcooldown)
+endfunction
+
+function DetectCorpseCooldown()
+    ;(GetOwningQuest() as BA_BeatriceDialogueGeneral).DetectCorpseCooldown()
+    float currenttime = GameDaysPassed.getvalue()
+    float setcooldown = currenttime + 1
+    BA_CooldownToSet_BeaDetectCorpse.setvalue(setcooldown)
 endfunction
