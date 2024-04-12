@@ -1,7 +1,6 @@
 Scriptname BA_BeatriceDialogue_FollowerScript extends Quest  
 
 Actor Property Ahni Auto
-Actor Property Beatrice Auto
 Actor Property playerRef Auto
 GlobalVariable Property BA_IsFollowing Auto
 GlobalVariable Property BA_IsWaiting Auto
@@ -48,28 +47,28 @@ endfunction
 function DismissIntoPlayerHome(actor actor1, string HomeLocation)
     if HomeLocation == "Whiterun"
         ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).DismissIntoPlayerHome(akspeaker, "Whiterun")
-        SandboxLocationAlias_Whiterun.ForceRefTo(Beatrice)
+        SandboxLocationAlias_Whiterun.ForceRefTo(actor1)
     elseif HomeLocation == "Windhelm"
         ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).DismissIntoPlayerHome(akspeaker, "Windhelm")
-        SandboxLocationAlias_Windhelm.ForceRefTo(Beatrice)
+        SandboxLocationAlias_Windhelm.ForceRefTo(actor1)
     elseif HomeLocation == "Riften"
         ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).DismissIntoPlayerHome(akspeaker, "Riften")
-        SandboxLocationAlias_Riften.ForceRefTo(Beatrice)
+        SandboxLocationAlias_Riften.ForceRefTo(actor1)
     elseif HomeLocation == "Solitude"
         ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).DismissIntoPlayerHome(akspeaker, "Solitude")
-        SandboxLocationAlias_Solitude.ForceRefTo(Beatrice)
+        SandboxLocationAlias_Solitude.ForceRefTo(actor1)
     elseif HomeLocation == "Markarth"
         ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).DismissIntoPlayerHome(akspeaker, "Markarth")
-        SandboxLocationAlias_Markarth.ForceRefTo(Beatrice)
+        SandboxLocationAlias_Markarth.ForceRefTo(actor1)
     elseif HomeLocation == "Hjaalmarch"
         ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).DismissIntoPlayerHome(akspeaker, "Hjaalmarch")
-        SandboxLocationAlias_Hjaalmarch.ForceRefTo(Beatrice)
+        SandboxLocationAlias_Hjaalmarch.ForceRefTo(actor1)
     elseif HomeLocation == "Falkreath"
         ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).DismissIntoPlayerHome(akspeaker, "Falkreath")
-        SandboxLocationAlias_Falkreath.ForceRefTo(Beatrice)
+        SandboxLocationAlias_Falkreath.ForceRefTo(actor1)
     elseif HomeLocation == "Pale"
         ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).DismissIntoPlayerHome(akspeaker, "Pale")
-        SandboxLocationAlias_Pale.ForceRefTo(Beatrice)
+        SandboxLocationAlias_Pale.ForceRefTo(actor1)
     endif
     Dismiss(actor1)
     actor1.EvaluatePackage()
@@ -95,9 +94,17 @@ endfunction
 
 function SetFollower(actor actor1)
     ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).SetFollower(akspeaker)
+    SandboxLocationAlias_Whiterun.Clear()
+    SandboxLocationAlias_Windhelm.Clear()
+    SandboxLocationAlias_Riften.Clear()
+    SandboxLocationAlias_Solitude.Clear()
+    SandboxLocationAlias_Markarth.Clear()
+    SandboxLocationAlias_Hjaalmarch.Clear()
+    SandboxLocationAlias_Falkreath.Clear()
+    SandboxLocationAlias_Pale.Clear()
     actor1.SetPlayerTeammate()
     Ahni.SetPlayerTeammate()
-    BeatriceFollowerAlias.ForceRefTo(Beatrice)
+    BeatriceFollowerAlias.ForceRefTo(actor1)
     AhniFollowerAlias.ForceRefTo(Ahni)
     BA_IsFollowing.SetValue(1)
 endfunction
