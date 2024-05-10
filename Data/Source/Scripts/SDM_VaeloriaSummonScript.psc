@@ -13,6 +13,9 @@ OCR_PrivateCellsUtil Property Util Auto
 ObjectReference Property SDM_VaeloriaInventory  Auto
 ReferenceAlias Property Alias_VaeloriaSummon  Auto
 
+GlobalVariable property BA_ShownMSG_PersonalInventory auto
+Message property BA_MSG_PersonalInventory Auto
+
 function Camp(actor actor1)
     ;(GetOwningQuest() as SDM_VaeloriaSummonScript).Camp(akspeaker)
     Util.FollowerCamping(actor1)
@@ -69,6 +72,21 @@ endfunction
 function Inventory()
     ;(GetOwningQuest() as SDM_VaeloriaSummonScript).Inventory()
     SDM_VaeloriaInventory.Activate(PlayerREF)
+endfunction
+
+function PersonalInventory(actor actor1)
+    ;(GetOwningQuest() as SDM_VaeloriaSummonScript).PersonalInventory(akspeaker)
+    if BA_ShownMSG_PersonalInventory.GetValue() == 0
+        BA_MSG_PersonalInventory.Show()
+        BA_ShownMSG_PersonalInventory.SetValue(1)
+    endif
+    form LeftHandItem = actor1.GetEquippedObject(0)
+    form RightHandItem = actor1.GetEquippedObject(1)
+    actor1.RemoveItem(LeftHandItem)
+    actor1.RemoveItem(RightHandItem)
+    actor1.ShowGiftMenu(false)
+    actor1.AddItem(LeftHandItem)
+    actor1.AddItem(RightHandItem)
 endfunction
 
 ;Notifications for the feature being restricted
