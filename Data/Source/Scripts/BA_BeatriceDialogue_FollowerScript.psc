@@ -5,10 +5,12 @@ Actor Property playerRef Auto
 GlobalVariable Property BA_IsFollowing Auto
 GlobalVariable Property BA_IsWaiting Auto
 GlobalVariable Property GameDaysPassed  Auto
+GlobalVariable property BA_ShownMSG_PersonalInventory auto
 GlobalVariable property GameDay auto
 GlobalVariable property GameHour auto
 GlobalVariable property GameMonth auto
 GlobalVariable property GameYear auto
+Message property BA_MSG_PersonalInventory Auto
 ObjectReference Property BA_BeatriceAhniInventory  Auto
 ObjectReference Property BeatriceXMarker  Auto
 Quest Property OCR_PrivateCellsUtilQST  Auto
@@ -24,7 +26,6 @@ ReferenceAlias Property SandboxLocationAlias_Riften  Auto
 ReferenceAlias Property SandboxLocationAlias_Solitude  Auto
 ReferenceAlias Property SandboxLocationAlias_Whiterun  Auto
 ReferenceAlias Property SandboxLocationAlias_Windhelm  Auto
-
 
 function Camp(actor actor1)
     ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).Camp(akspeaker)
@@ -90,6 +91,21 @@ endfunction
 function Inventory()
     ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).Inventory()
     BA_BeatriceAhniInventory.Activate(PlayerREF)
+endfunction
+
+function PersonalInventory(actor actor1)
+    ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).PersonalInventory(akspeaker)
+    if BA_ShownMSG_PersonalInventory.GetValue() == 0
+        BA_MSG_PersonalInventory.Show()
+        BA_ShownMSG_PersonalInventory.SetValue(1)
+    endif
+    form LeftHandItem = actor1.GetEquippedObject(0)
+    form RightHandItem = actor1.GetEquippedObject(1)
+    actor1.RemoveItem(LeftHandItem)
+    actor1.RemoveItem(RightHandItem)
+    actor1.ShowGiftMenu(false)
+    actor1.AddItem(LeftHandItem)
+    actor1.AddItem(RightHandItem)
 endfunction
 
 function SetFollower(actor actor1)
