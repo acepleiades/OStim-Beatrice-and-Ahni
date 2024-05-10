@@ -98,13 +98,7 @@ function PersonalInventory(actor actor1)
         BA_MSG_PersonalInventory.Show()
         BA_ShownMSG_PersonalInventory.SetValue(1)
     endif
-    form LeftHandItem = actor1.GetEquippedObject(0)
-    form RightHandItem = actor1.GetEquippedObject(1)
-    actor1.RemoveItem(LeftHandItem)
-    actor1.RemoveItem(RightHandItem)
     actor1.ShowGiftMenu(false)
-    actor1.AddItem(LeftHandItem)
-    actor1.AddItem(RightHandItem)
 endfunction
 
 function SetFollower(actor actor1)
