@@ -31,74 +31,110 @@ ReferenceAlias Property BeatriceAutoFG3_Kiss  Auto
 ReferenceAlias Property BeatriceAutoFG4_FollowUp  Auto
 ReferenceAlias Property BeatriceAutoFG4_PrivateRoom  Auto
 ReferenceAlias Property BeatriceAutoFG5_Sexual  Auto
-SPELL Property BA_Buff_BeasInsight_Spell1  Auto
-SPELL Property BA_Buff_BeasInsight_Spell2  Auto
-SPELL Property BA_Buff_BeasInsight_Spell3  Auto
-SPELL Property BA_Buff_BeasInsight_Spell4  Auto
-SPELL Property BA_Buff_BeasInsight_Spell5  Auto
+ReferenceAlias Property OCR_InvitedNPC_MyOwn  Auto
+ReferenceAlias Property OCR_InvitedNPC_Original  Auto
 
 Function AutonomousInteraction()
     ;(GetOwningQuest() as BA_BeatriceAutonomy).AutonomousInteraction()
+    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting autonomous interaction.")
     float currentTime = GameDaysPassed.getvalue()
     if Beatrice.IsInFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
-        ;Beatrice is lover. Lover autonomy is possible.
+        MiscUtil.PrintConsole("BA_BeatriceAutonomy: Beatrice is lover. Lover autonomy is possible.")
         bool locationIsPrivate = 0
         form beatriceLocation = Beatrice.GetCurrentLocation() as form
         if beatriceLocation.HasKeyword(LocTypePlayerHouse) == 1 || beatriceLocation.HasKeyword(OCR_PrivateCell)  == 1
-            locationIsPrivate == 1
+            MiscUtil.PrintConsole("BA_BeatriceAutonomy: Location is private.")
+            locationIsPrivate = 1
+        Else
+            MiscUtil.PrintConsole("BA_BeatriceAutonomy: Location is not private.")
         endif
         bool wantsSexual = 0
         if currenttime > BA_CooldownToSet_BeaAutonomySexual.GetValue()
-            wantsSexual == 1
+            MiscUtil.PrintConsole("BA_BeatriceAutonomy: Beatrice wants to have sexual intercourse.")
+            wantsSexual = 1
+        Else
+            MiscUtil.PrintConsole("BA_BeatriceAutonomy: Beatrice does not want to have sexual intercourse.")
         endif
         bool locationHasInn = 0
         if beatriceLocation.HasKeyword(LocTypeCity) == 1 || beatriceLocation.HasKeyword(LocTypeTown)  == 1 || beatriceLocation.HasKeyword(LocTypePlayerHouse)  == 1 || beatriceLocation.HasKeyword(LocTypeInn)  == 1
-            locationHasInn == 1
+            MiscUtil.PrintConsole("BA_BeatriceAutonomy: Current location has an inn.")
+            locationHasInn = 1
+        Else
+            MiscUtil.PrintConsole("BA_BeatriceAutonomy: Current location does not have an inn.")
         endif
         ;Checks
         if locationIsPrivate == 1
             ;In private space
             if wantsSexual == 1
+                MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting autonomous action Sexual Intercourse.")
                 SexualIntercourse_SetReady()
             else
                 int r = Utility.RandomInt(1, 3)
                 if r == 1
+                    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting autonomous action Hang Out.")
                     HangOut_SetReady()
                 ElseIf r == 2
+                    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting autonomous action Caress.")
                     Caress_SetReady()
                 Else ; r == 3
+                    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting autonomous action Kiss.")
                     Kiss_SetReady()
                 EndIf
             endif
         Else
             ;In public space
             if wantsSexual == 1 && locationHasInn == 1
+                MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting autonomous action Private Inn Room.")
                 PrivateRoom_SetReady()
             else
                 int r = Utility.RandomInt(1, 3)
                 if r == 1
+                    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting autonomous action Hang Out.")
                     HangOut_SetReady()
                 ElseIf r == 2
+                    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting autonomous action Caress.")
                     Caress_SetReady()
                 Else ; r == 3
+                    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting autonomous action Kiss.")
                     Kiss_SetReady()
                 EndIf
             endif
         Endif
     Else
-        ;Beatrice is not lover. Lover autonomy is not possible.
+        MiscUtil.PrintConsole("BA_BeatriceAutonomy: Beatrice is not lover. Lover autonomy is not possible.")
         BA_CooldownToSet_BeaAutonomySexual.SetValue(BA_CooldownToSet_BeaAutonomyNonsexual.GetValue())
-        if BA_CooldownToSet_BeaAutonomyNonsexual.GetValue() > currentTime
+        if currentTime > BA_CooldownToSet_BeaAutonomyNonsexual.GetValue() 
+            MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting autonomous action Hang Out.")
             HangOut_SetReady()
+        else
+            MiscUtil.PrintConsole("BA_BeatriceAutonomy: Nonsexual autonomy is still is cooldown.")
         endif
     endif
 endFunction
+
+function AutonomousInteractionRefresh()
+    ;(GetOwningQuest() as BA_BeatriceAutonomy).AutonomousInteractionRefresh()
+    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Refreshing autonomy.")
+    BA_BeatriceAutoFG_Ready.setvalue(0)
+    AutonomousInteraction()
+    ;For OCR private cells, prevents further refreshing when autonomous actions are not possible.
+    actor OCR_InvitedNPC = OCR_InvitedNPC_Original.GetActorReference()
+    OCR_InvitedNPC_MyOwn.ForceRefTo(OCR_InvitedNPC)
+endfunction
+
+function ClearMyOCRInvitedNPCAlias()
+    ;(GetOwningQuest() as BA_BeatriceAutonomy).ClearMyOCRInvitedNPCAlias()
+    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Clearing my OCR_InvitedNPC Alias.")
+    OCR_InvitedNPC_MyOwn.Clear()
+endfunction
 
 ; Type 1: Hang out
 
 Function HangOut_SetReady()
     ;(GetOwningQuest() as BA_BeatriceAutonomy).HangOut_SetReady()
     ClearFGAliases()
+    Utility.Wait(0.1)
+    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Forcing Beatrice into alias and re-evaluating package.")
     BeatriceAutoFG1_HangOut.ForceRefTo(Beatrice)
     BA_BeatriceAutoFG_Ready.setvalue(1)
     Beatrice.EvaluatePackage()
@@ -109,6 +145,8 @@ EndFunction
 Function Caress_SetReady()
     ;(GetOwningQuest() as BA_BeatriceAutonomy).Caress_SetReady()
     ClearFGAliases()
+    Utility.Wait(0.1)
+    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Forcing Beatrice into alias and re-evaluating package.")
     BeatriceAutoFG2_Caress.ForceRefTo(Beatrice)
     BA_BeatriceAutoFG_Ready.setvalue(1)
     Beatrice.EvaluatePackage()
@@ -119,6 +157,8 @@ EndFunction
 Function Kiss_SetReady()
     ;(GetOwningQuest() as BA_BeatriceAutonomy).Kiss_SetReady()
     ClearFGAliases()
+    Utility.Wait(0.1)
+    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Forcing Beatrice into alias and re-evaluating package.")
     BeatriceAutoFG3_Kiss.ForceRefTo(Beatrice)
     BA_BeatriceAutoFG_Ready.setvalue(1)
     Beatrice.EvaluatePackage()
@@ -129,6 +169,8 @@ EndFunction
 Function PrivateRoom_SetReady()
     ;(GetOwningQuest() as BA_BeatriceAutonomy).PrivateRoom_SetReady()
     ClearFGAliases()
+    Utility.Wait(0.1)
+    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Forcing Beatrice into alias and re-evaluating package.")
     BeatriceAutoFG4_PrivateRoom.ForceRefTo(Beatrice)
     BA_BeatriceAutoFG_Ready.setvalue(1)
     Beatrice.EvaluatePackage()
@@ -139,7 +181,9 @@ EndFunction
 Function SexualIntercourse_SetReady()
     ;(GetOwningQuest() as BA_BeatriceAutonomy).SexualIntercourse_SetReady()
     ClearFGAliases()
-    BeatriceAutoFG1_HangOut.ForceRefTo(Beatrice)
+    Utility.Wait(0.1)
+    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Forcing Beatrice into alias and re-evaluating package.")
+    BeatriceAutoFG5_Sexual.ForceRefTo(Beatrice)
     BA_BeatriceAutoFG_Ready.setvalue(1)
     Beatrice.EvaluatePackage()
 EndFunction
@@ -147,12 +191,14 @@ EndFunction
 ; Function for clearing all FG aliases
 
 Function ClearFGAliases()
+    MiscUtil.PrintConsole("BA_BeatriceAutonomy: Clearing aliases.")
     BeatriceAutoFG1_HangOut.Clear()
     BeatriceAutoFG2_Caress.Clear()
     BeatriceAutoFG3_Kiss.Clear()
     BeatriceAutoFG4_FollowUp.Clear()
     BeatriceAutoFG4_PrivateRoom.Clear()
     BeatriceAutoFG5_Sexual.Clear()
+    OCR_InvitedNPC_MyOwn.Clear()
 endFunction
 
 ; Results for the invitation being accepted
@@ -209,6 +255,7 @@ Function Autonomous_Sexual_HandRelief()
         Actor[] actors = OActorUtil.ToArray(playerref, Beatrice)
         int BuilderID = OThreadBuilder.Create(actors)
         OThreadBuilder.SetStartingAnimation(BuilderID, sceneID)
+        OThreadBuilder.NoFurniture(BuilderID)
         int threadID = OThreadBuilder.Start(BuilderID)
     elseif iChoice == 1 ; Chair
         ObjectReference chair = OFurniture.FindFurnitureOfType("chair", PlayerRef, 10000, 1000)
@@ -242,6 +289,7 @@ Function Autonomous_Sexual_Fellatio()
         Actor[] actors = OActorUtil.ToArray(playerref, Beatrice)
         int BuilderID = OThreadBuilder.Create(actors)
         OThreadBuilder.SetStartingAnimation(BuilderID, sceneID)
+        OThreadBuilder.NoFurniture(BuilderID)
         int threadID = OThreadBuilder.Start(BuilderID)
     elseif iChoice == 1 ; Chair
         ObjectReference chair = OFurniture.FindFurnitureOfType("chair", PlayerRef, 10000, 1000)
@@ -275,6 +323,7 @@ Function Autonomous_Sexual_MountedSex()
         Actor[] actors = OActorUtil.ToArray(playerref, Beatrice)
         int BuilderID = OThreadBuilder.Create(actors)
         OThreadBuilder.SetStartingAnimation(BuilderID, sceneID)
+        OThreadBuilder.NoFurniture(BuilderID)
         int threadID = OThreadBuilder.Start(BuilderID)
     elseif iChoice == 1 ; Chair
         ObjectReference chair = OFurniture.FindFurnitureOfType("chair", PlayerRef, 10000, 1000)
@@ -398,24 +447,5 @@ Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
     ;Ensure maximum intimacy is 100
     if Intimacy > 100
         Beatrice.SetFactionRank(OCR_Lover_Value_Intimacy, 100)
-    endif
-    ;Apply buff
-    Debug.Notification("Spending time with Beatrice was insightful.")
-    playerref.DispelSpell(BA_Buff_BeasInsight_Spell1)
-    playerref.DispelSpell(BA_Buff_BeasInsight_Spell2)
-    playerref.DispelSpell(BA_Buff_BeasInsight_Spell3)
-    playerref.DispelSpell(BA_Buff_BeasInsight_Spell4)
-    playerref.DispelSpell(BA_Buff_BeasInsight_Spell5)
-    Utility.Wait(0.1)
-    if Intimacy < 20
-        BA_Buff_BeasInsight_Spell1.cast(playerRef, playerRef)
-    elseif Intimacy < 40
-        BA_Buff_BeasInsight_Spell2.cast(playerRef, playerRef)
-    elseif Intimacy < 60
-        BA_Buff_BeasInsight_Spell3.cast(playerRef, playerRef)
-    elseif Intimacy < 80
-        BA_Buff_BeasInsight_Spell4.cast(playerRef, playerRef)
-    else ; This covers Intimacy > 80
-        BA_Buff_BeasInsight_Spell5.cast(playerRef, playerRef)
     endif
 EndEvent
