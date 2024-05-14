@@ -23,6 +23,7 @@ Keyword Property LocTypePlayerHouse Auto
 Keyword Property LocTypeTown Auto
 Keyword Property OCR_PrivateCell Auto
 Message Property BA_BeatriceAutoFG_FurnitureMSG Auto
+MiscObject Property Gold001  Auto
 ObjectReference Property BA_XMarkerReset  Auto
 Quest Property OCR_OStimScenesUtilQST Auto
 Quest Property OCR_OStimSequencesUtilQST Auto
@@ -262,6 +263,7 @@ endfunction
 function Autonomous_InnVisit()
     ;(GetOwningQuest() as BA_BeatriceAutonomy).Autonomous_InnVisit()
     MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting inn room visit.")
+    PlayerRef.AddItem(Gold001, 50)
     (OCR_PrivateCellsUtilQST as OCR_PrivateCellsUtil).GoToPrivateCell_Inn(Beatrice)
     MiscUtil.PrintConsole("BA_BeatriceAutonomy: Starting autonomous action Private Room Follow Up.")
     Utility.Wait(1.5)
