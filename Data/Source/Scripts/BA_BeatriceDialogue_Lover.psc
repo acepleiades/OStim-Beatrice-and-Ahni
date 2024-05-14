@@ -1,7 +1,11 @@
 Scriptname BA_BeatriceDialogue_Lover extends Quest  
 
+GlobalVariable Property BA_Cooldown_BeatriceAutoFG_Nonsexual  Auto
+GlobalVariable Property BA_Cooldown_BeatriceAutoFG_Sexual  Auto
 Faction Property OCR_Lover_AcceptsMultiplePartnersFaction  Auto
 Faction Property OCR_OStimScenes_3PPCandidateFaction  Auto
+Message Property BA_BeatriceAutoFG_CfgAuto_NonsexualMSG Auto
+Message Property BA_BeatriceAutoFG_CfgAuto_SexualMSG Auto
 Quest Property OCR_OStimScenesUtilQST Auto
 Quest Property OCR_OStimSequencesUtilQST Auto
 Quest Property OCR_PrivateCellsUtilQST  Auto
@@ -59,4 +63,36 @@ Function TalkIntoAcceptingMultiplePartners(actor actor1)
     Debug.Notification("Beatrice has come to accept you seeing other partners.")
     actor1.AddToFaction(OCR_Lover_AcceptsMultiplePartnersFaction)
     actor1.AddToFaction(OCR_OStimScenes_3PPCandidateFaction)
+endfunction
+
+Function ManageAutonomousCD()
+    ;(GetOwningQuest() as BA_BeatriceDialogue_Lover).ManageAutonomousCD()
+    Int iChoice0 = BA_BeatriceAutoFG_CfgAuto_NonsexualMSG.Show()
+    if iChoice0 == 0
+        BA_Cooldown_BeatriceAutoFG_Nonsexual.SetValue(0.125)
+    ElseIf iChoice0 == 1
+        BA_Cooldown_BeatriceAutoFG_Nonsexual.SetValue(0.250)
+    ElseIf iChoice0 == 2
+        BA_Cooldown_BeatriceAutoFG_Nonsexual.SetValue(0.500)
+    ElseIf iChoice0 == 3
+        BA_Cooldown_BeatriceAutoFG_Nonsexual.SetValue(1.000)
+    ElseIf iChoice0 == 4
+        BA_Cooldown_BeatriceAutoFG_Nonsexual.SetValue(2.000)
+    ElseIf iChoice0 == 5
+        BA_Cooldown_BeatriceAutoFG_Nonsexual.SetValue(3.000)
+    endif
+    Int iChoice1 = BA_BeatriceAutoFG_CfgAuto_SexualMSG.Show()
+    if iChoice1 == 0
+        BA_Cooldown_BeatriceAutoFG_Sexual.SetValue(0.125)
+    ElseIf iChoice1 == 1
+        BA_Cooldown_BeatriceAutoFG_Sexual.SetValue(0.250)
+    ElseIf iChoice1 == 2
+        BA_Cooldown_BeatriceAutoFG_Sexual.SetValue(0.500)
+    ElseIf iChoice1 == 3
+        BA_Cooldown_BeatriceAutoFG_Sexual.SetValue(1.000)
+    ElseIf iChoice1 == 4
+        BA_Cooldown_BeatriceAutoFG_Sexual.SetValue(2.000)
+    ElseIf iChoice1 == 5
+        BA_Cooldown_BeatriceAutoFG_Sexual.SetValue(3.000)
+    endif
 endfunction
