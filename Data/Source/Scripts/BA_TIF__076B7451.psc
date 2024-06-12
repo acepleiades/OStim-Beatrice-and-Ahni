@@ -6,7 +6,7 @@ Scriptname BA_TIF__076B7451 Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-Debug.Notification("You do not have enough gold.")
+(GetOwningQuest() as BA_AhniDialogue_Lover).InnVisitRestricted_Gold()
 ;END CODE
 EndFunction
 ;END FRAGMENT

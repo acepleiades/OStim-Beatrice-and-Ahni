@@ -6,7 +6,7 @@ Scriptname BA_TIF__075BA098 Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-Debug.Notification("Location must be: a town, city, owned house or inn.")
+(GetOwningQuest() as BA_BeatriceDialogue_Lover).InnVisitRestricted_Location()
 ;END CODE
 EndFunction
 ;END FRAGMENT

@@ -51,10 +51,10 @@ Function Cooking()
         if cookingpot != ""
             StartCookingTogetherScene(PlayerREF, SDM_Vaeloria, cookingpot, cookingpotscene)
         Else
-            Debug.Notification("No cooking pot found.")
+            Debug.Notification("SDM_VaeloriaPrivateSummonScript: No suitable furniture was found.")
         endif
     Else
-        Debug.Notification("Install OARE to cook together with Vaeloria.")
+        Debug.Notification("SDM_VaeloriaPrivateSummonScript: No suitable OStim scene was found.")
     endif
 endFunction
 

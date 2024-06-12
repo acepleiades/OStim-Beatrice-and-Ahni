@@ -7,6 +7,9 @@ GlobalVariable Property BA_CooldownToSet_AhniIdle_Daily  Auto
 Actor Property Ahni Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
 
+Message Property BA_MSG_Ahni_IntimacyIncrease Auto
+Message Property BA_MSG_Ahni_RomanceProgressionPossible Auto
+
 Function SetIdleCooldown()
     float currenttime = GameDaysPassed.getvalue()
     float setcooldown = currenttime + BA_Cooldown_IdleDialogue.getvalue()
@@ -25,17 +28,17 @@ Function IncreaseIntimacy()
         int newIntimacy = Intimacy + 1
         Ahni.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
         MiscUtil.PrintConsole("Ahni's Intimacy value was " + Intimacy + " and is now " + newIntimacy)
-        debug.notification("Intimacy with Ahni has increased.")
+        BA_MSG_Ahni_IntimacyIncrease.Show()
         if Intimacy < 10 && newIntimacy >= 10
-            debug.notification("You may progress your relationship with Ahni at a private location.")
+            BA_MSG_Ahni_RomanceProgressionPossible.Show()
         elseif Intimacy < 20 && newIntimacy >= 20
-            debug.notification("You may progress your relationship with Ahni at a private location.")
+            BA_MSG_Ahni_RomanceProgressionPossible.Show()
         elseif Intimacy < 30 && newIntimacy >= 30
-            debug.notification("You may progress your relationship with Ahni at a private location.")
+            BA_MSG_Ahni_RomanceProgressionPossible.Show()
         elseif Intimacy < 40 && newIntimacy >= 40
-            debug.notification("You may progress your relationship with Ahni at a private location.")
+            BA_MSG_Ahni_RomanceProgressionPossible.Show()
         elseif Intimacy < 50 && newIntimacy >= 50
-            debug.notification("You may progress your relationship with Ahni at a private location.")
+            BA_MSG_Ahni_RomanceProgressionPossible.Show()
         endif
     endif
     ;Ensure maximum intimacy is 100

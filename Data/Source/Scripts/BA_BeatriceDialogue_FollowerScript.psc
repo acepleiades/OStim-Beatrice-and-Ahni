@@ -27,6 +27,8 @@ ReferenceAlias Property SandboxLocationAlias_Solitude  Auto
 ReferenceAlias Property SandboxLocationAlias_Whiterun  Auto
 ReferenceAlias Property SandboxLocationAlias_Windhelm  Auto
 
+Message Property BA_MSG_WaitRestricted Auto
+
 function Camp(actor actor1)
     ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).Camp(akspeaker)
     (OCR_PrivateCellsUtilQST as OCR_PrivateCellsUtil).FollowerCamping(actor1)
@@ -131,5 +133,5 @@ endfunction
 
 Function WaitRestricted()
     ;(GetOwningQuest() as BA_BeatriceDialogue_FollowerScript).WaitRestricted()
-    Debug.Notification("You cannot have Beatrice and Ahni wait in this location.")
+    BA_MSG_WaitRestricted.Show()
 endfunction

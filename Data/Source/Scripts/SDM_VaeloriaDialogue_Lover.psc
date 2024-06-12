@@ -4,6 +4,10 @@ Quest Property OCR_OStimScenesUtilQST Auto
 Quest Property OCR_OStimSequencesUtilQST Auto
 Quest Property OCR_PrivateCellsUtilQST Auto
 
+Message Property BA_MSG_LoverRestricted_Gold Auto
+Message Property BA_MSG_LoverRestricted_NoInn Auto
+Message Property BA_MSG_LoverRestricted_PrivateLocation Auto
+
 Function Flirt(actor actor1)
     ;(GetOwningQuest() as SDM_VaeloriaDialogue_Lover).Flirt(akspeaker)
     int r = Utility.RandomInt(0, 1)
@@ -56,13 +60,13 @@ endfunction
 
 function InnVisitRestricted_Gold()
     ;(GetOwningQuest() as SDM_VaeloriaDialogue_Lover).InnVisitRestricted_Gold()
-    Debug.Notification("You do not have enough gold.")
+    BA_MSG_LoverRestricted_Gold.Show()
 endfunction
 function InnVisitRestricted_Location()
     ;(GetOwningQuest() as SDM_VaeloriaDialogue_Lover).InnVisitRestricted_Location()
-    Debug.Notification("Location must be: a town, city, owned house or inn.")
+    BA_MSG_LoverRestricted_NoInn.Show()
 endfunction
 Function UnrestrictedActionsRestricted()
     ;(GetOwningQuest() as SDM_VaeloriaDialogue_Lover).UnrestrictedActionsRestricted()
-    Debug.Notification("You must be in a private location.")
+    BA_MSG_LoverRestricted_PrivateLocation.Show()
 endfunction

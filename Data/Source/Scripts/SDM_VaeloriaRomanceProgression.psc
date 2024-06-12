@@ -11,6 +11,13 @@ GlobalVariable Property OCR_RomanceProgression_NoMoreInThisInstance  Auto
 Quest Property SDM_VaeloriaDialogue_RomanceProgressionQST  Auto
 ReferenceAlias Property Alias_Vaeloria  Auto
 
+Message Property SDM_MSG_Vaeloria_RPConfessionAccept Auto
+Message Property SDM_MSG_Vaeloria_RPReconcile Auto
+Message Property SDM_MSG_Vaeloria_RPResponseDislike Auto
+Message Property SDM_MSG_Vaeloria_RPResponseDislikeRespect Auto
+Message Property SDM_MSG_Vaeloria_RPResponseNeutral Auto
+Message Property SDM_MSG_Vaeloria_RPResponsePositive Auto
+
 Function ResponsePositive(actor Vaeloria)
     ;(GetOwningQuest() as SDM_VaeloriaRomanceProgression).ResponsePositive(akspeaker)
     int VaeloriaIntimacy = Vaeloria.GetFactionRank(OCR_Lover_Value_Intimacy)
@@ -20,7 +27,7 @@ Function ResponsePositive(actor Vaeloria)
             newIntimacy = 100
         endif
         Vaeloria.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
-        Debug.Notification("Intimacy with Vaeloria has greatly increased.")
+        SDM_MSG_Vaeloria_RPResponsePositive.Show()
     endif
     int currentRomanceProgressionStage = SDM_VaeloriaDialogue_RomanceProgressionQST.GetStage()
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
@@ -38,7 +45,7 @@ Function ResponseNeutral(actor Vaeloria)
             newIntimacy = 100
         endif
         Vaeloria.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
-        Debug.Notification("Intimacy with Vaeloria has increased.")
+        SDM_MSG_Vaeloria_RPResponseNeutral.Show()
     endif
     int currentRomanceProgressionStage = SDM_VaeloriaDialogue_RomanceProgressionQST.GetStage()
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
@@ -54,7 +61,7 @@ Function ResponseDislike(actor Vaeloria)
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
     SDM_VaeloriaDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     SDM_VaeloriaDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-    Debug.Notification("Vaeloria dislikes your response.")
+    SDM_MSG_Vaeloria_RPResponseDislike.Show()
     Alias_Vaeloria.Clear()
 endFunction
 
@@ -64,7 +71,7 @@ Function ResponseDislikeRespect(actor Vaeloria)
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
     SDM_VaeloriaDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     SDM_VaeloriaDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-    Debug.Notification("Vaeloria dislikes, yet respects your response.")
+    SDM_MSG_Vaeloria_RPResponseDislikeRespect.Show()
     Alias_Vaeloria.Clear()
 endFunction
 
@@ -74,7 +81,7 @@ Function ConfessionAccept(actor actor1)
     actor1.AddToFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
     actor1.AddToFaction(OCR_Lover_AcceptsMultiplePartnersFaction)
     actor1.AddToFaction(OCR_OStimScenes_3PPCandidateFaction)
-    Debug.Notification("Vaeloria has become your committed lover.")
+    SDM_MSG_Vaeloria_RPConfessionAccept.Show()
     SDM_VaeloriaDialogue_RomanceProgressionQST.SetStage(100)
 endFunction
 
@@ -88,6 +95,6 @@ Function Reconcile()
     SDM_VaeloriaDialogue_RomanceProgression_Blockage.SetValue(0)
     SDM_VaeloriaDialogue_RomanceProgression_HasApologized.SetValue(1)
     SDM_VaeloriaDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-    Debug.Notification("Vaeloria accepts your reconciliation.")
+    SDM_MSG_Vaeloria_RPReconcile.Show()
     Alias_Vaeloria.Clear()
 endFunction

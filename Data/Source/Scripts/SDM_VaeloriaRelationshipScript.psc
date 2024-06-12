@@ -10,6 +10,9 @@ GlobalVariable property GameYear auto
 GlobalVariable property SDM_VaeloriaDialogue_CooldownFlatter auto
 OCR_OStimSequencesUtil Property Util Auto
 
+Message Property SDM_MSG_Vaeloria_IntimacyIncrease Auto
+Message Property SDM_MSG_Vaeloria_RomanceProgressionPossible Auto
+
 function Flatter(actor actor1)
     ;(GetOwningQuest() as SDM_VaeloriaRelationshipScript).Flatter(akspeaker)
     RegisterForModEvent("ostim_end", "OStimEnd")
@@ -26,17 +29,17 @@ Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
         int newrank = currentrank + 2
         SDM_Vaeloria.SetFactionRank(OCR_Lover_Value_Intimacy, newrank)
         MiscUtil.PrintConsole("Vaeloria's Intimacy value was " + currentrank + " and is now " + newrank)
-        debug.notification("Intimacy with Vaeloria has increased.")
+        SDM_MSG_Vaeloria_IntimacyIncrease.Show()
         if currentrank < 10 && newrank >= 10
-            debug.notification("You may progress your relationship with Vaeloria at a private location.")
+            SDM_MSG_Vaeloria_RomanceProgressionPossible.Show()
         elseif currentrank < 20 && newrank >= 20
-            debug.notification("You may progress your relationship with Vaeloria at a private location.")
+            SDM_MSG_Vaeloria_RomanceProgressionPossible.Show()
         elseif currentrank < 30 && newrank >= 30
-            debug.notification("You may progress your relationship with Vaeloria at a private location.")
+            SDM_MSG_Vaeloria_RomanceProgressionPossible.Show()
         elseif currentrank < 40 && newrank >= 40
-            debug.notification("You may progress your relationship with Vaeloria at a private location.")
+            SDM_MSG_Vaeloria_RomanceProgressionPossible.Show()
         elseif currentrank < 50 && newrank >= 50
-            debug.notification("You may progress your relationship with Vaeloria at a private location.")
+            SDM_MSG_Vaeloria_RomanceProgressionPossible.Show()
         endif
     endif
     UnregisterForModEvent("ostim_end")

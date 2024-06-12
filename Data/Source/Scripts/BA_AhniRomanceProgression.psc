@@ -12,6 +12,12 @@ Quest Property BA_AhniDialogue_RomanceProgressionQST  Auto
 Quest Property OCR_OStimScenesUtilQST  Auto
 ReferenceAlias Property Alias_Ahni  Auto
 
+Message Property BA_MSG_Ahni_RPApologize Auto
+Message Property BA_MSG_Ahni_RPConfessionAccept Auto
+Message Property BA_MSG_Ahni_RPResponseNeutral Auto
+Message Property BA_MSG_Ahni_RPResponsePositive Auto
+Message Property BA_MSG_Ahni_RPResponseUnhappy Auto
+
 Function ResponsePositive(actor Ahni)
     ;(GetOwningQuest() as BA_AhniRomanceProgression).ResponsePositive(akspeaker)
     int AhniIntimacy = Ahni.GetFactionRank(OCR_Lover_Value_Intimacy)
@@ -21,7 +27,7 @@ Function ResponsePositive(actor Ahni)
             newIntimacy = 100
         endif
         Ahni.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
-        Debug.Notification("Intimacy with Ahni has greatly increased.")
+        BA_MSG_Ahni_RPResponsePositive.Show()
     endif
     int currentRomanceProgressionStage = BA_AhniDialogue_RomanceProgressionQST.GetStage()
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
@@ -39,7 +45,7 @@ Function ResponseNeutral(actor Ahni)
             newIntimacy = 100
         endif
         Ahni.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
-        Debug.Notification("Intimacy with Ahni has increased.")
+        BA_MSG_Ahni_RPResponseNeutral.Show()
     endif
     int currentRomanceProgressionStage = BA_AhniDialogue_RomanceProgressionQST.GetStage()
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
@@ -55,7 +61,7 @@ Function ResponseUnhappy(actor Ahni)
     int newRomanceProgressionStage = currentRomanceProgressionStage + 10
     BA_AhniDialogue_RomanceProgressionQST.SetStage(newRomanceProgressionStage)
     BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-    Debug.Notification("Ahni dislikes your response.")
+    BA_MSG_Ahni_RPResponseUnhappy.Show()
     Alias_Ahni.Clear()
 endFunction
 
@@ -70,7 +76,7 @@ Function ConfessionAccept(actor actor1)
     actor1.AddToFaction(OCR_Lover_PlayerCommittedRelationshipFaction)
     actor1.AddToFaction(OCR_Lover_AcceptsMultiplePartnersFaction)
     actor1.AddToFaction(OCR_OStimScenes_3PPCandidateFaction)
-    Debug.Notification("Ahni has become your committed lover.")
+    BA_MSG_Ahni_RPConfessionAccept.Show()
     BA_AhniDialogue_RomanceProgressionQST.SetStage(100)
 endFunction
 
@@ -84,6 +90,6 @@ Function Apologize()
     BA_AhniDialogue_RomanceProgression_Blockage.SetValue(0)
     BA_AhniDialogue_RomanceProgression_HasApologized.SetValue(1)
     BA_AhniDialogue_RomanceProgression_ProgressionPossible.SetValue(0)
-    Debug.Notification("Ahni accepts your apology.")
+    BA_MSG_Ahni_RPApologize.Show()
     Alias_Ahni.Clear()
 endFunction

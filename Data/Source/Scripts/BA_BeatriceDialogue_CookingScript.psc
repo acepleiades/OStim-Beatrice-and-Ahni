@@ -47,7 +47,7 @@ Function Cooking()
             ObjectReference cookingpot = OFurniture.FindFurnitureOfType("cookingpot", PlayerRef, 10000, 1000)
             StartCookingTogetherScene(PlayerREF, Beatrice, cookingpot, cookingpotscene)
         Else
-            Debug.Notification("Install OARE to cook together with Beatrice.")
+            Debug.Notification("BA_BeatriceDialogue_CookingScript: No suitable OStim scene was found.")
         endif
     Else
         AdvanceTimeAndFade(1)

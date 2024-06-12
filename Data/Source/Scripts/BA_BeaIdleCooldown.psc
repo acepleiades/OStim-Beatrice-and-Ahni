@@ -6,6 +6,9 @@ GlobalVariable Property BA_CooldownToSet_BeaIdle  Auto
 Actor Property Beatrice Auto
 Faction Property OCR_Lover_Value_Intimacy  Auto
 
+Message Property BA_MSG_Beatrice_IntimacyIncrease Auto
+Message Property BA_MSG_Beatrice_RomanceProgressionPossible Auto
+
 Function SetIdleCooldown()
     float currenttime = GameDaysPassed.getvalue()
     float setcooldown = currenttime + BA_Cooldown_IdleDialogue.getvalue()
@@ -18,17 +21,17 @@ Function IncreaseIntimacy()
         int newIntimacy = Intimacy + 1
         Beatrice.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
         MiscUtil.PrintConsole("Beatrice's Intimacy value was " + Intimacy + " and is now " + newIntimacy)
-        debug.notification("Intimacy with Beatrice has increased.")
+        BA_MSG_Beatrice_IntimacyIncrease.Show()
         if Intimacy < 10 && newIntimacy >= 10
-            debug.notification("You may progress your relationship with Beatrice at a private location.")
+            BA_MSG_Beatrice_RomanceProgressionPossible.Show()
         elseif Intimacy < 20 && newIntimacy >= 20
-            debug.notification("You may progress your relationship with Beatrice at a private location.")
+            BA_MSG_Beatrice_RomanceProgressionPossible.Show()
         elseif Intimacy < 30 && newIntimacy >= 30
-            debug.notification("You may progress your relationship with Beatrice at a private location.")
+            BA_MSG_Beatrice_RomanceProgressionPossible.Show()
         elseif Intimacy < 40 && newIntimacy >= 40
-            debug.notification("You may progress your relationship with Beatrice at a private location.")
+            BA_MSG_Beatrice_RomanceProgressionPossible.Show()
         elseif Intimacy < 50 && newIntimacy >= 50
-            debug.notification("You may progress your relationship with Beatrice at a private location.")
+            BA_MSG_Beatrice_RomanceProgressionPossible.Show()
         endif
     endif
     ;Ensure maximum intimacy is 100

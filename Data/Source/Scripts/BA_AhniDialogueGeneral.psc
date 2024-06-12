@@ -21,6 +21,10 @@ SPELL Property BA_Buff_AhnisJoy_Spell3  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell4  Auto
 SPELL Property BA_Buff_AhnisJoy_Spell5  Auto
 
+Message Property BA_MSG_Ahni_IntimacyIncrease Auto
+Message Property BA_MSG_Ahni_RomanceProgressionPossible Auto
+Message Property BA_MSG_Ahni_HangOutBuff Auto
+
 Function HangOut(actor Ahni)
     ;(GetOwningQuest() as BA_AhniDialogueGeneral).HangOut(akspeaker)
     RegisterForModEvent("ostim_end", "OStimEnd")
@@ -46,17 +50,17 @@ Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
         int newIntimacy = Intimacy + 2
         Ahni.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
         MiscUtil.PrintConsole("Ahni's Intimacy value was " + Intimacy + " and is now " + newIntimacy)
-        debug.notification("Intimacy with Ahni has increased.")
+        BA_MSG_Ahni_IntimacyIncrease.Show()
         if Intimacy < 10 && newIntimacy >= 10
-            debug.notification("You may progress your relationship with Ahni at a private location.")
+            BA_MSG_Ahni_RomanceProgressionPossible.Show()
         elseif Intimacy < 20 && newIntimacy >= 20
-            debug.notification("You may progress your relationship with Ahni at a private location.")
+            BA_MSG_Ahni_RomanceProgressionPossible.Show()
         elseif Intimacy < 30 && newIntimacy >= 30
-            debug.notification("You may progress your relationship with Ahni at a private location.")
+            BA_MSG_Ahni_RomanceProgressionPossible.Show()
         elseif Intimacy < 40 && newIntimacy >= 40
-            debug.notification("You may progress your relationship with Ahni at a private location.")
+            BA_MSG_Ahni_RomanceProgressionPossible.Show()
         elseif Intimacy < 50 && newIntimacy >= 50
-            debug.notification("You may progress your relationship with Ahni at a private location.")
+            BA_MSG_Ahni_RomanceProgressionPossible.Show()
         endif
     endif
     ;Ensure maximum intimacy is 100
@@ -64,7 +68,7 @@ Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
         Ahni.SetFactionRank(OCR_Lover_Value_Intimacy, 100)
     endif
     ;Apply buff
-    Debug.Notification("Spending time with Ahni was enjoyable.")
+    BA_MSG_Ahni_HangOutBuff.Show()
     playerref.DispelSpell(BA_Buff_AhnisJoy_Spell1)
     playerref.DispelSpell(BA_Buff_AhnisJoy_Spell2)
     playerref.DispelSpell(BA_Buff_AhnisJoy_Spell3)

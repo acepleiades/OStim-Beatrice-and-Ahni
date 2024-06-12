@@ -16,6 +16,10 @@ ReferenceAlias Property Alias_VaeloriaSummon  Auto
 GlobalVariable property BA_ShownMSG_PersonalInventory auto
 Message property BA_MSG_PersonalInventory Auto
 
+Message Property SDM_MSG_Vaeloria_IntimacyIncrease Auto
+Message Property SDM_MSG_Vaeloria_RomanceProgressionPossible Auto
+Message Property SDM_MSG_Vaeloria_CannotDismiss Auto
+
 function Camp(actor actor1)
     ;(GetOwningQuest() as SDM_VaeloriaSummonScript).Camp(akspeaker)
     Util.FollowerCamping(actor1)
@@ -29,17 +33,17 @@ function CombatEndResults(actor actor1)
         int newrank = currentrank + 1
         actor1.SetFactionRank(OCR_Lover_Value_Intimacy, newrank)
         MiscUtil.PrintConsole("Vaeloria's Intimacy value was " + currentrank + " and is now " + newrank)
-        debug.notification("Intimacy with Vaeloria has increased.")
+        SDM_MSG_Vaeloria_IntimacyIncrease.Show()
         if currentrank < 10 && newrank >= 10
-            debug.notification("You may progress your relationship with Vaeloria at a private location.")
+            SDM_MSG_Vaeloria_RomanceProgressionPossible.Show()
         elseif currentrank < 20 && newrank >= 20
-            debug.notification("You may progress your relationship with Vaeloria at a private location.")
+            SDM_MSG_Vaeloria_RomanceProgressionPossible.Show()
         elseif currentrank < 30 && newrank >= 30
-            debug.notification("You may progress your relationship with Vaeloria at a private location.")
+            SDM_MSG_Vaeloria_RomanceProgressionPossible.Show()
         elseif currentrank < 40 && newrank >= 40
-            debug.notification("You may progress your relationship with Vaeloria at a private location.")
+            SDM_MSG_Vaeloria_RomanceProgressionPossible.Show()
         elseif currentrank < 50 && newrank >= 50
-            debug.notification("You may progress your relationship with Vaeloria at a private location.")
+            SDM_MSG_Vaeloria_RomanceProgressionPossible.Show()
         endif
     endif
     int playerLevel = PlayerREF.GetLevel()
@@ -93,5 +97,5 @@ endfunction
 
 Function DismissRestricted()
     ;(GetOwningQuest() as SDM_VaeloriaSummonScript).DismissRestricted()
-    Debug.Notification("You cannot dismiss Vaeloria in this location.")
+    SDM_MSG_Vaeloria_CannotDismiss.Show()
 endfunction

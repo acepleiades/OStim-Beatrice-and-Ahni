@@ -10,6 +10,10 @@ Quest Property OCR_OStimScenesUtilQST Auto
 Quest Property OCR_OStimSequencesUtilQST Auto
 Quest Property OCR_PrivateCellsUtilQST  Auto
 
+Message Property BA_MSG_LoverRestricted_Gold Auto
+Message Property BA_MSG_LoverRestricted_NoInn Auto
+Message Property BA_MSG_LoverRestricted_PrivateLocation Auto
+
 Function Flirt(actor actor1)
     ;(GetOwningQuest() as BA_BeatriceDialogue_Lover).Flirt(akspeaker)
     int r = Utility.RandomInt(0, 1)
@@ -95,4 +99,19 @@ Function ManageAutonomousCD()
     ElseIf iChoice1 == 5
         BA_Cooldown_BeatriceAutoFG_Sexual.SetValue(3.000)
     endif
+endfunction
+
+;Notifications for the feature being restricted
+
+function InnVisitRestricted_Gold()
+    ;(GetOwningQuest() as BA_BeatriceDialogue_Lover).InnVisitRestricted_Gold()
+    BA_MSG_LoverRestricted_Gold.Show()
+endfunction
+function InnVisitRestricted_Location()
+    ;(GetOwningQuest() as BA_BeatriceDialogue_Lover).InnVisitRestricted_Location()
+    BA_MSG_LoverRestricted_NoInn.Show()
+endfunction
+Function UnrestrictedActionsRestricted()
+    ;(GetOwningQuest() as BA_BeatriceDialogue_Lover).UnrestrictedActionsRestricted()
+    BA_MSG_LoverRestricted_PrivateLocation.Show()
 endfunction

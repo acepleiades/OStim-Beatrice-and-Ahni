@@ -6,7 +6,7 @@ Scriptname BA_TIF__0751D0CA Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-(GetOwningQuest() as BA_BeatriceRomanceProgression).ResponseUpset(akspeaker)
+(GetOwningQuest() as BA_BeatriceRomanceProgression).ResponseNeutral(akspeaker)
 ;END CODE
 EndFunction
 ;END FRAGMENT

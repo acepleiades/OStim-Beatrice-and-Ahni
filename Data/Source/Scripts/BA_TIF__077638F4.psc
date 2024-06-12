@@ -6,7 +6,7 @@ Scriptname BA_TIF__077638F4 Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-Debug.Notification("You must be in a private location.")
+(GetOwningQuest() as BA_AhniDialogue_Lover).UnrestrictedActionsRestricted()
 ;END CODE
 EndFunction
 ;END FRAGMENT

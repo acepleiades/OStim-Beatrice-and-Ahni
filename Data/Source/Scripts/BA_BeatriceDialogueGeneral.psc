@@ -21,6 +21,10 @@ SPELL Property BA_Buff_BeasInsight_Spell3  Auto
 SPELL Property BA_Buff_BeasInsight_Spell4  Auto
 SPELL Property BA_Buff_BeasInsight_Spell5  Auto
 
+Message Property BA_MSG_Beatrice_IntimacyIncrease Auto
+Message Property BA_MSG_Beatrice_RomanceProgressionPossible Auto
+Message Property BA_MSG_Beatrice_HangOutBuff Auto
+
 Function HangOut(actor Beatrice)
     ;(GetOwningQuest() as BA_BeatriceDialogueGeneral).HangOut(akspeaker)
     RegisterForModEvent("ostim_end", "OStimEnd")
@@ -46,17 +50,17 @@ Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
         int newIntimacy = Intimacy + 2
         Beatrice.SetFactionRank(OCR_Lover_Value_Intimacy, newIntimacy)
         MiscUtil.PrintConsole("Beatrice's Intimacy value was " + Intimacy + " and is now " + newIntimacy)
-        debug.notification("Intimacy with Beatrice has increased.")
+        BA_MSG_Beatrice_IntimacyIncrease.Show()
         if Intimacy < 10 && newIntimacy >= 10
-            debug.notification("You may progress your relationship with Beatrice at a private location.")
+            BA_MSG_Beatrice_RomanceProgressionPossible.Show()
         elseif Intimacy < 20 && newIntimacy >= 20
-            debug.notification("You may progress your relationship with Beatrice at a private location.")
+            BA_MSG_Beatrice_RomanceProgressionPossible.Show()
         elseif Intimacy < 30 && newIntimacy >= 30
-            debug.notification("You may progress your relationship with Beatrice at a private location.")
+            BA_MSG_Beatrice_RomanceProgressionPossible.Show()
         elseif Intimacy < 40 && newIntimacy >= 40
-            debug.notification("You may progress your relationship with Beatrice at a private location.")
+            BA_MSG_Beatrice_RomanceProgressionPossible.Show()
         elseif Intimacy < 50 && newIntimacy >= 50
-            debug.notification("You may progress your relationship with Beatrice at a private location.")
+            BA_MSG_Beatrice_RomanceProgressionPossible.Show()
         endif
     endif
     ;Ensure maximum intimacy is 100
@@ -64,7 +68,7 @@ Event OStimEnd(string eventName, string strArg, float numArg, Form sender)
         Beatrice.SetFactionRank(OCR_Lover_Value_Intimacy, 100)
     endif
     ;Apply buff
-    Debug.Notification("Spending time with Beatrice was insightful.")
+    BA_MSG_Beatrice_HangOutBuff.Show()
     playerref.DispelSpell(BA_Buff_BeasInsight_Spell1)
     playerref.DispelSpell(BA_Buff_BeasInsight_Spell2)
     playerref.DispelSpell(BA_Buff_BeasInsight_Spell3)
