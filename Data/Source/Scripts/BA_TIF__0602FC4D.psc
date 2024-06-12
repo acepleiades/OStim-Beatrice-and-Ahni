@@ -10,6 +10,7 @@ MyActor.Enable()
 MyAlias.ForceRefTo(akspeaker)
 MyAlias1.ForceRefTo(MyActor)
 GetOwningQuest().setstage(30)
+BA_BeatriceAhni_QuestMarker.setstage(10)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -19,3 +20,5 @@ EndFunction
 Actor Property myActor  Auto  
 ReferenceAlias Property myAlias  Auto  
 ReferenceAlias Property myAlias1  Auto  
+
+Quest Property BA_BeatriceAhni_QuestMarker  Auto  
